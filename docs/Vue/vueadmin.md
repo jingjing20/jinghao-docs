@@ -9,39 +9,25 @@ title: 'vue实现小程序后台'
 
 
 ::: tip 前言
-本文作者：婧婧  
-本文共 3920 字，读完需要15分钟。  
-希望你看完能学到一点点东西！✨✨</font>
+本文作者：婧婧
+本文共 3920 字，读完需要15分钟。
+希望你看完能学到一点点东西！✨✨
 :::
 
 #### **<font face="楷体" color=Tomato>请花一些时间安静的读完本文，相信我，你一定可以实现属于自己的小程序后台管理系统。（对有需要的小伙伴还是有点意思的😊😊😊）</font>**
 
 
-本文是主要是基于开源项目 **<font face="宋体" size="2" color="FireBrick"> vue-admin-template  + koa + element-ui + 微信云开发HTTP API </font>** 
+本文是主要是基于开源项目 **<font face="宋体" size="2" color="FireBrick"> vue-admin-template  + koa + element-ui + 微信云开发HTTP API </font>**
  实现一个微信小程序后台管理系统。采用前后端分离架构，以  `vue-admin-template` 实现管理系统的前端界面，后端我们这里采用 `Koa2`来实现，当然你也可以换其他框架来实现。
 
 ## 来吧 先来看一波效果图
 
-***
+图挂了，上掘金看。
 
-![](https://user-gold-cdn.xitu.io/2020/3/7/170b2d7628caca74?w=1892&h=932&f=gif&s=768614)
-***
-
-![](https://user-gold-cdn.xitu.io/2020/3/5/170a983cb9f044bc?w=1678&h=740&f=gif&s=1275081)
-
-***
-![](https://user-gold-cdn.xitu.io/2020/3/5/170a9640a37dc139?w=1572&h=740&f=gif&s=570298)
-***
-
-![](https://user-gold-cdn.xitu.io/2020/3/5/170a964b599dc054?w=1572&h=740&f=gif&s=358805)
-***
-
-![](https://user-gold-cdn.xitu.io/2020/3/5/170a96adfbdbfe50?w=1664&h=740&f=gif&s=1475860)
 ## 具体实现步骤来了
 ### 一、前端项目初始化
 >从  github 上克隆初始前台项目 ***[附上项目地址](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)***
 
-![](https://user-gold-cdn.xitu.io/2020/3/5/170aa4c4df1dd4f6?w=1167&h=182&f=png&s=62573)  
 - 1、成功后用 `vscode` 编辑器打开项目
 - 2、我们在 `views` 目录下只留下 `login` 文件夹和 `404.vue`，其它全部删除。然后根据自己的小程序中需要管理的数据设计好需要哪些前台页面，根据自己的需求建好项目的视图文件。
 - 3、接下来在 `router` 文件夹下的 `index.js` 中根据自己设计的页面进行路由规划（关于路由的配置就不详细去讲了）
@@ -51,13 +37,12 @@ title: 'vue实现小程序后台'
 
 ***
 
->**<font face="楷体" size="3" color=Tomato>这里我以本项目目录和克隆下来的项目目录来一个对照应该会更清楚一点。</font>** 
+>**<font face="楷体" size="3" color=Tomato>这里我以本项目目录和克隆下来的项目目录来一个对照应该会更清楚一点。</font>**
 
 >下图为初始克隆下来的项目文件目录，注意图中标注的地方。
 
 
 
-![](https://user-gold-cdn.xitu.io/2020/3/6/170ad8994581c880?w=983&h=555&f=png&s=42246)
 
 ><font color="Tomato" size="3" face="黑体">下图为本项目文件目录。注意标注的地方你会发现只有两个地方有改变。</font>
 
@@ -65,7 +50,6 @@ title: 'vue实现小程序后台'
 - 2、在 `api` 目录下新建了三个文件 `playlist.js`、`swiper.js`、`blog.js`，分别用于上一点三个页面数据的获取。
 
 
-![](https://user-gold-cdn.xitu.io/2020/3/6/170ad9a0529bdd50?w=1023&h=665&f=png&s=98027)
 
 ***
 
@@ -73,11 +57,11 @@ title: 'vue实现小程序后台'
 - 接下来，我们进行后端项目初始化。
 ***
 ### 二、后端项目初始化
-- 1、初始化一个 `node` 项目，安装项目相关依赖。此项目只用到以下依赖包  
- `koa`——本项目采用的后端框架  
- `koa-router`——路由管理工具  
- `koa-body`——用于`post`请求参数解析  
- `koa2-cors`——解决前后端跨域问题的`npm`包  
+- 1、初始化一个 `node` 项目，安装项目相关依赖。此项目只用到以下依赖包
+ `koa`——本项目采用的后端框架
+ `koa-router`——路由管理工具
+ `koa-body`——用于`post`请求参数解析
+ `koa2-cors`——解决前后端跨域问题的`npm`包
  `request`、`request-promise`——用于发送获取小程序云数据库中数据的请求
 
 - 2、在根目录下新建一个 `app.js` 文件用于后端服务的入口文件
@@ -94,7 +78,6 @@ title: 'vue实现小程序后台'
 #### 前端：
 - 在前端项目`views`文件夹中的`playlist.vue`中解构出`api`文件夹中的`playlist.js`中封装好的方法。如图所示：
 
-![](https://user-gold-cdn.xitu.io/2020/3/6/170adc9f6bb41190?w=632&h=44&f=png&s=6698)
 >`fetchList`方法用于歌单的获取、`del`方法用于歌单的删除。代码不长，我就把`playlist.js`中这两个方法直接贴出来了。如下：（`baseURL`为后端项目开启的地址，`request`方法是模板项目封装好的`axios`请求方法）
 
 ```
@@ -180,9 +163,9 @@ router.get('/del', async(ctx, next) => {
 module.exports = router
 ```
 
- 一些解释如下：  
-- 1、这里用`get`还是`post`方法是必须和前端请求时的方法一样。  
-- 2、`query`是操作数据库的`sql`语句。 
+ 一些解释如下：
+- 1、这里用`get`还是`post`方法是必须和前端请求时的方法一样。
+- 2、`query`是操作数据库的`sql`语句。
 - 3、返回到后端的数据中`code=20000`，这是前端模板中规定后端必须返回的状态码，有这个状态码才认为请求成功。
 - 4、代码第三行导入了`callCloudDB`模块，这是因为我们在请求或查询云数据库和操作云数据库的时候，查微信官方文档发现，给出的请求地址特别像（只是地址中一个参数不一样）、请求参数完全一样。所以我们把它封装成一个`callCloudDB`模块。之后需要和数据库交互的时候直接调用此方法传入相应的参数就可以了。例如上面`del`方法需要删除数据库数据的代码`const res = await callCloudDB(ctx, 'databasedelete', query)`,其中`ctx`为上下文环境，`databasedelete`为删除操作固定参数，`query`为`sql`语句。之后需要进行其他操作只要改对应的参数就可以。怎么样，是不是很方便😬😬😬。
 >`callCloudDB.js`代码附上：
@@ -218,11 +201,10 @@ module.exports = callCloudDB
 
 ***
 #### <font color="red" size="3">让我们简单从头再理一遍思路。</font>
-- 1、前端在`api`文件里写好获取数据的请求方法、向后端传需要用到的参数。  
+- 1、前端在`api`文件里写好获取数据的请求方法、向后端传需要用到的参数。
 - 2、我们在后端`controllers`文件夹下建好相对应的文件，如图：
 
-![](https://user-gold-cdn.xitu.io/2020/3/6/170b0520ecd6b69d?w=289&h=114&f=png&s=3784)
-- 3、在文件里借助微信官方文档中云开发下的[HTTP API文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/)提供的方法去写好操作自己的云函数或云数据库的代码。将取到的值返回给前端，记得一定要带上一个状态码（20000）  
+- 3、在文件里借助微信官方文档中云开发下的[HTTP API文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/)提供的方法去写好操作自己的云函数或云数据库的代码。将取到的值返回给前端，记得一定要带上一个状态码（20000）
 - 4、在前端项目中写好页面（初始项目已经集成`element-ui`，我们可以直接用它），把后端返回的数据进行一些处理，然后显示到页面上。
 
 ***
@@ -245,22 +227,20 @@ module.exports = callCloudDB
 #### 1、浏览器滑动到页面底部的时候再次从数据库获取数据显示到页面上。
 - 对于浏览器是否滑到了底部我刚开始准备进行如下的判断。
 >1、获取文档的真实高度（即你设定每次取多少条数据在页面上显示的高度）
-`const scrollHeight = document.documentElement.scrollHeight`  
->2、获取浏览器窗口的可视高度,就是肉眼可见的那部分全屏高度   
-`const clientHeight = document.documentElement.clientHeight`  
->3、获取浏览器向上滚动的高度  
-`const scrollTop = document.documentElement.scrollTop `  
+`const scrollHeight = document.documentElement.scrollHeight`
+>2、获取浏览器窗口的可视高度,就是肉眼可见的那部分全屏高度
+`const clientHeight = document.documentElement.clientHeight`
+>3、获取浏览器向上滚动的高度
+`const scrollTop = document.documentElement.scrollTop `
 
 - 取到这三个数据之后根据`scrollHeight == scrollTop + clientHeight`这个判断条件来控制是否再次获取数据，然后、、、🤕🤕
 - 看图
 
-![](https://user-gold-cdn.xitu.io/2020/3/7/170b2fb70a54cb87?w=1916&h=905&f=png&s=329178)
 - 最后我才想到这个点上来，会不会是这个有问题。对这三个数据分别打印出来如上图，红框中就是浏览器滑到底部打印出来的数据，我哭了🤪🤪
 - 我们发现`scrollHeight 比 scrollTop + clientHeight`小那么0.28、、。所以导致`scroll.js`没有生效。改一下这个判断条件就解决了这个问题。
 
 #### 2、我在博客页面获取发布时间的的时候
 - 即图示红框部分
-![](https://user-gold-cdn.xitu.io/2020/3/7/170b30e9003e6cd8?w=1546&h=285&f=png&s=36509)
 - 我刚开始在后端返回的数据中看到有`createTime`下面有一个`$date`，可是我就是取不到这个值。试了好久、、后来我把`createTime`打印出来发现它是一个`{__ob__: Observer}`。然后百度发现好多这样的问题，根据一位网友的方法顺利解决。需要将返回的数据`data`先转换为`JSON`字符串形式，然后再从字符串形式转换成`JSON`格式即`JSON.parse(JSON.stringify(data))`（虽然知道要这样做就可以解决问题，但是不知道为什么😅，希望如果有了解的大佬给大白解释一下。😁）
 - 对于时间格式化采用了`moment.js`来解决，`moment.js`这个时间处理类库真的很方便哦！使用也很简单！推荐一下，文末附链接。（写此篇文章中途学到的🤣🤣）
 

@@ -74,7 +74,6 @@ body {
 页面初始效果如下图
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f3c6b19ff1e0?w=1916&h=901&f=png&s=40912)
 
 ```!
 接下来我们在 style.css 中改变一些属性来学习flex布局。
@@ -90,7 +89,6 @@ body {
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f4f9bc4f739a?w=1033&h=840&f=png&s=24984)
 
 ### inline-flex 布局（将对象作为内联弹性伸缩盒显示）
 
@@ -100,7 +98,6 @@ body {
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f51a46c04276?w=1029&h=827&f=png&s=24020)
 
 ### flex-direction （子元素的排列方向）
 
@@ -113,7 +110,6 @@ body {
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f59f938d6d0a?w=1041&h=838&f=png&s=27947)
 
 ### flex-wrap （是否要换行显示）
 
@@ -121,7 +117,6 @@ body {
 
 -   默认是不换行（flex-wrap: nowrap）
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f5e11ec742d9?w=1918&h=582&f=png&s=38666)
 
 ```css
 .container {
@@ -130,7 +125,6 @@ body {
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f62733125bc4?w=1746&h=720&f=gif&s=715230)
 
 ### flex-flow（同时控制 flex-direction 和 flex-wrap）
 
@@ -145,7 +139,6 @@ body {
 row-reverse 即水平反方向 还有column-reverse垂直反方向、wrap-reverse（反向换行）
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f67dee0c7262?w=1166&h=624&f=png&s=32915)
 
 ### justify-content（子元素主轴方向间隔）
 
@@ -158,7 +151,6 @@ row-reverse 即水平反方向 还有column-reverse垂直反方向、wrap-revers
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f6eebfa453b3?w=1163&h=561&f=png&s=20933)
 
 ```css
 .container {
@@ -167,7 +159,6 @@ row-reverse 即水平反方向 还有column-reverse垂直反方向、wrap-revers
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f739568bf170?w=1163&h=708&f=png&s=26072)
 
 ```css
 .container {
@@ -176,7 +167,6 @@ row-reverse 即水平反方向 还有column-reverse垂直反方向、wrap-revers
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f758c5b2b281?w=811&h=461&f=png&s=15776)
 
 ```css
 .container {
@@ -185,7 +175,6 @@ row-reverse 即水平反方向 还有column-reverse垂直反方向、wrap-revers
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711f760f3b4f3cf?w=811&h=521&f=png&s=16684)
 
 ```!
 space-around 和 space-between 的区别就是 space-between 只会在子元素之间添加间隔，space-around 会把父容器边界也视为子元素添加间隔
@@ -204,7 +193,6 @@ space-around 和 space-between 的区别就是 space-between 只会在子元素�
 ```
 
 -   默认是（align-items: stretch）拉伸
-    ![](https://user-gold-cdn.xitu.io/2020/3/28/1711fbb16b004c23?w=1108&h=799&f=png&s=31805)
 
 -   flex-start（容器顶部）
 
@@ -217,7 +205,6 @@ space-around 和 space-between 的区别就是 space-between 只会在子元素�
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711fd2d68319227?w=1110&h=652&f=png&s=25025)
 
 -   flex-center（居中）
 
@@ -230,7 +217,6 @@ space-around 和 space-between 的区别就是 space-between 只会在子元素�
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711fd568d83f2b3?w=1107&h=727&f=png&s=26572)
 
 -   flex-end（容器底部）
 
@@ -243,7 +229,6 @@ space-around 和 space-between 的区别就是 space-between 只会在子元素�
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711fd36761e110b?w=1110&h=679&f=png&s=25854)
 
 -   baseline（以子元素里面的内容作为基准线水平对齐）
 
@@ -263,7 +248,6 @@ space-around 和 space-between 的区别就是 space-between 只会在子元素�
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/1711fe7a53003492?w=1108&h=668&f=png&s=26358)
 
 ### align-content （子元素侧轴方向对齐方式）
 
@@ -283,17 +267,11 @@ align-content: stretch|center|flex-start |flex-end|space-between|space-around;
 
 -   以上属性效果图依次如下：
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200a8f47852f6?w=932&h=808&f=png&s=33273)
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200afe568c4a2?w=930&h=815&f=png&s=30477)
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200b6e21c6e57?w=931&h=749&f=png&s=29205)
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200c0414c6a22?w=931&h=825&f=png&s=30816)
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200c730bc1147?w=930&h=820&f=png&s=30736)
 
-![](https://user-gold-cdn.xitu.io/2020/3/28/171200ccb8ecbdf5?w=930&h=797&f=png&s=30336)
 
 ### flex-item（子元素属性）
 
@@ -318,7 +296,6 @@ align-content: stretch|center|flex-start |flex-end|space-between|space-around;
 ```
 
 -   如图，6 到了最前面，1 到了最后面
-    ![](https://user-gold-cdn.xitu.io/2020/3/28/1712016f5fa23b57?w=933&h=582&f=png&s=22095)
 
 ### flex（flex-grow，flex-shrink 和 flex-basis 的缩写）
 

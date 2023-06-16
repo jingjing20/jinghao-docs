@@ -223,6 +223,6 @@ module.exports = {
     // 是否显示更新时间
     lastUpdated: true,
     // 当设置为true时，VitePress不会因死链接而导致构建失败。
-    ignoreDeadLinks: true,
+    // ignoreDeadLinks: true,
     head
 };
