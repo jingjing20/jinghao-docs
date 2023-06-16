@@ -6,7 +6,7 @@ hero:
     text: 生活第一，其他往后捎
     tagline: 一个想学后端的小前端...
     image:
-        src: .././imgs/this.png
+        # src: /jing.png
         alt: Docs Vitepress
     actions:
         - theme: brand
