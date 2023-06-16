@@ -3,7 +3,8 @@ const head = [['link', { rel: 'icon', href: '/jingjing.jpg' }]];
 // markdown 配置
 const markdown = {
     // 是否开启行号
-    lineNumbers: true
+    lineNumbers: true,
+    theme: 'material-theme-palenight',
 };
 
 // gitee logo svg icon
@@ -22,7 +23,7 @@ const footer = {
     message: 'MIT Licensed',
     // 版权
     copyright:
-        '版权声明：本中文文档内容版权为 <a href="https://github.com/jingjing20" target="_black" >MadDragon</a> 所有，保留所有权利。'
+        '版权声明：本中文文档内容版权为 <a href="https://github.com/jingjing20" target="_black" >jingjing20</a> 所有，保留所有权利。'
 };
 
 // 上一个和下一个链接上方显示的文本
@@ -179,6 +180,9 @@ const sidebar = [
 
 // 主题配置
 const themeConfig = {
+    search: {
+        provider: 'local'
+    },
     // 全局左侧菜单
     sidebar,
     sidebarDepth: 3,
@@ -198,9 +202,8 @@ const themeConfig = {
     docFooter,
     // 右侧目录标题
     outlineTitle: '本页目录',
-	darkModeSwitchLabel: '外观',
-    returnToTopLabel: '返回顶部',
-    lastUpdatedText: '上次更新',
+    darkModeSwitchLabel: '外观',
+    returnToTopLabel: '返回顶部'
 };
 
 // APP配置

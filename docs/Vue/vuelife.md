@@ -1,8 +1,5 @@
----
-title: 'vue生命周期函数'
-prev: false
-next: /Vue/vueadmin.md
----
+# vue生命周期函数
+
 ## vue生命周期函数
 #### 先给一张vue官网介绍生命周期的流程图
 
@@ -32,8 +29,8 @@ next: /Vue/vueadmin.md
 * **updated**：由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。
 * **activated**：keep-alive 组件激活时调用。
 * **deactivated**：keep-alive 组件停用时调用。
-* **beforeDestroy**：实例销毁之前调用。在这一步，实例仍然完全可用。   
-* **destroyed**：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。  
+* **beforeDestroy**：实例销毁之前调用。在这一步，实例仍然完全可用。
+* **destroyed**：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
 ***
 
 ::: tip 提醒
@@ -176,11 +173,11 @@ next: /Vue/vueadmin.md
 #### 代码结构不难看懂
 创建了一个 **<font face="黑体" color=red size="3">app</font>** 的Vue根实例，将其挂载到页面 id 为 app 的 Dom 元素上。
 然后局部注册了一个组件名为 **<font face="黑体" color=red size="3">haohao</font>** 并在根实例中将其注册，使其可以在根实例的作用域中使用。
-将子组件用 `<keep-alive>` 包裹，为接下来的测试作准备。  
+将子组件用 `<keep-alive>` 包裹，为接下来的测试作准备。
 
-关于`<keep-alive>`的问题就不在这里作过多阐述了，大家可以参考以下两篇文章  
-&nbsp; &nbsp; 1、[https://zhuanlan.zhihu.com/p/96740001](https://zhuanlan.zhihu.com/p/96740001)  
-&nbsp; &nbsp; 2、[https://www.jianshu.com/p/4b55d312d297](https://www.jianshu.com/p/4b55d312d297)  
+关于`<keep-alive>`的问题就不在这里作过多阐述了，大家可以参考以下两篇文章
+&nbsp; &nbsp; 1、[https://zhuanlan.zhihu.com/p/96740001](https://zhuanlan.zhihu.com/p/96740001)
+&nbsp; &nbsp; 2、[https://www.jianshu.com/p/4b55d312d297](https://www.jianshu.com/p/4b55d312d297)
 
 
 
@@ -197,11 +194,11 @@ next: /Vue/vueadmin.md
 ***
 ### 2、beforeMount 与 mounted 和 activated 与 deactivated
 
-![](https://user-gold-cdn.xitu.io/2020/2/27/170824e7cbd334b6?w=1666&h=760&f=png&s=160738)  
+![](https://user-gold-cdn.xitu.io/2020/2/27/170824e7cbd334b6?w=1666&h=760&f=png&s=160738)
 
-- `beforeMount` 执行时：`data` 和 `el `均已经初始化，但从` {{message}}` 的展示情况可以看出此时 `el` 并没有渲染数据，这里就是应用的 `Virtual DOM`（虚拟Dom）技术，先把坑占住了。到后面 `mounted` 挂载的时候再把值渲染上去  
+- `beforeMount` 执行时：`data` 和 `el `均已经初始化，但从` {{message}}` 的展示情况可以看出此时 `el` 并没有渲染数据，这里就是应用的 `Virtual DOM`（虚拟Dom）技术，先把坑占住了。到后面 `mounted` 挂载的时候再把值渲染上去
 
-- `mounted` 执行时：此时 el 已经渲染完成并挂载到实例上  
+- `mounted` 执行时：此时 el 已经渲染完成并挂载到实例上
 - 我们在控制台看到`component activated`被打印出来了，说明子组件`jh-component` 被 `<keep-alive>` 包裹，随 `el` 的挂载而触发了。
 - 然后我们进行一些操作，在控制台输入 `app.show = false`我们再来看看有什么变化，测试结果如下图：
 
@@ -209,7 +206,7 @@ next: /Vue/vueadmin.md
 
 - 怎么样，有没有发现什么？😉😉😉
 - 因为我们在这里修改了`data`的值，所以会触发`beforeUpdate`和`updated`钩子函数，这里先不管这两个函数，我们看到deactivated钩子已经触发，表示`<keep-alive>`已经停用。
-![](https://user-gold-cdn.xitu.io/2020/2/27/1708468a286d313f?w=811&h=91&f=png&s=14104)同时我们的子组件也会消失。    
+![](https://user-gold-cdn.xitu.io/2020/2/27/1708468a286d313f?w=811&h=91&f=png&s=14104)同时我们的子组件也会消失。
 
 ***
 
@@ -219,7 +216,7 @@ next: /Vue/vueadmin.md
 - 我们发现`beforeUpdate`和`updated`触发时，`el`中的数据都已经渲染完成，但根据控制台打印的信息`beforeUpdate = jingjing`而`updated = haohao`可知，只有当`updated`钩子被调用时候，组件`dom`才会被更新。
 
 
-![](https://user-gold-cdn.xitu.io/2020/2/27/17084704b28b8f4f?w=1588&h=663&f=png&s=132884)  
+![](https://user-gold-cdn.xitu.io/2020/2/27/17084704b28b8f4f?w=1588&h=663&f=png&s=132884)
 
 ***
 

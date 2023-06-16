@@ -1,6 +1,4 @@
----
-title: 'Vue基础'
----
+# Vue基础
 
 # 指令
 ## v-html
@@ -126,7 +124,7 @@ export default {
 ```
 
 ![mark](http://image.jinghao.xyz/blog/20200422/8phmScApUKSk.png)
-![mark](http://image.jinghao.xyz/blog/20200422/mvj4kgDNQKaJ.jpg)  
+![mark](http://image.jinghao.xyz/blog/20200422/mvj4kgDNQKaJ.jpg)
 
 ::: tip 提示
 如果状态更新不是很频繁就用 v-if 反之 v-show。

@@ -1,6 +1,5 @@
----
-title: 'Vue 必知必会'
----
+# Vue 必知必会
+
 ## 1、v-if 和 v-show 区别
 - v-show 通过 CSS display 控制显示隐藏。
 - v-if 组件真正的渲染和销毁，而不是显示的隐藏。
@@ -26,8 +25,8 @@ title: 'Vue 必知必会'
 * **updated**：由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。
 * **activated**：keep-alive 组件激活时调用。
 * **deactivated**：keep-alive 组件停用时调用。
-* **beforeDestroy**：实例销毁之前调用。在这一步，实例仍然完全可用。   
-* **destroyed**：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。  
+* **beforeDestroy**：实例销毁之前调用。在这一步，实例仍然完全可用。
+* **destroyed**：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
 
 ## 5、在哪个生命周期内调用异步请求？
 可以在钩子函数 `created`、`beforeMount`、`mounted` 中进行调用，因为在这三个钩子函数中，`data` 已经创建，可以将服务端端返回的数据进行赋值。但是本人推荐在 `created` 钩子函数中调用异步请求，因为在 `created` 钩子函数中调用异步请求有以下优点：
@@ -35,9 +34,9 @@ title: 'Vue 必知必会'
 - ssr 不支持 `beforeMount` 、`mounted` 钩子函数，所以放在 created 中有助于一致性。
 
 ## 6、computed 和 watch 的区别和运用的场景？
-**computed：** 是计算属性，依赖其它属性值，并且 **computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed 的值。**  
+**computed：** 是计算属性，依赖其它属性值，并且 **computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed 的值。**
 
-**watch：** 更多的是**观察**的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作。  
+**watch：** 更多的是**观察**的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作。
 
 **运用场景：**
 
@@ -48,16 +47,16 @@ title: 'Vue 必知必会'
 ## 7、Vue 的父子组件生命周期执行顺序？
 Vue 的父组件和子组件生命周期钩子函数执行顺序可以归类为以下 4 部分：
 
-- 加载渲染过程  
+- 加载渲染过程
 父 `beforeCreate` -> 父 `created` -> 父 `beforeMount` -> 子 `beforeCreate` -> 子 `created` -> 子 `beforeMount` -> 子 `mounted` -> 父 `mounted`
 
-- 子组件更新过程  
+- 子组件更新过程
 父 `beforeUpdate` -> 子 `beforeUpdate` -> 子 `updated` -> 父 `updated`
 
-- 父组件更新过程  
+- 父组件更新过程
 父 `beforeUpdate` -> 父 `updated`
 
-- 销毁过程  
+- 销毁过程
 父 `beforeDestroy` -> 子 `beforeDestroy` -> 子 `destroyed` -> 父 `destroyed`
 
 ## 8、何时需要使用 beforeDestory
@@ -102,13 +101,13 @@ Vue.nextTick(function () {
 
 ### 实现原理
 
-vue 中的 scoped 通过在 DOM 结构以及 css 样式上加唯一不重复的标记:data-v-hash的方式，以保证唯一（而这个工作是由过 PostCSS转译实现的），达到样式私有化模块化的目的。  
+vue 中的 scoped 通过在 DOM 结构以及 css 样式上加唯一不重复的标记:data-v-hash的方式，以保证唯一（而这个工作是由过 PostCSS转译实现的），达到样式私有化模块化的目的。
 
 总结一下 scoped 三条渲染规则：
 
-- 给HTML的DOM节点加一个不重复 data 属性(形如：data-v-19fca230)来表示他的唯一性  
+- 给HTML的DOM节点加一个不重复 data 属性(形如：data-v-19fca230)来表示他的唯一性
 
-- 在每句css选择器的末尾（编译后的生成的 css 语句）加一个当前组件的data属性选择器（如[data-v-19fca230]）来私有化样式  
+- 在每句css选择器的末尾（编译后的生成的 css 语句）加一个当前组件的data属性选择器（如[data-v-19fca230]）来私有化样式
 
 - 如果组件内部包含有其他组件，只会给其他组件的最外层标签加上当前组件的data属性
 

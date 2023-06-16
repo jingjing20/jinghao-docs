@@ -3,17 +3,17 @@ layout: home
 
 hero:
     name: web Docs
-    text: 生活第一，其他往后捎。
+    text: 生活第一，其他往后捎
     tagline: 一个想学后端的小前端...
     image:
         src: .././imgs/this.png
         alt: Docs Vitepress
     actions:
         - theme: brand
-          text: Start
+          text: Get Started
           link: ./css/flex.md
         - theme: alt
-          text: github
+          text: View on GitHub
           link: https://github.com/jingjing20
 
 features:
