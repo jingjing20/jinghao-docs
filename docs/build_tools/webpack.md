@@ -1,6 +1,4 @@
----
-title: 'coderwhy webpack学习笔记'
----
+# coderwhy webpack 学习笔记
 
 ## 一、邂逅`webpack`以及初体验
 
@@ -145,4 +143,3 @@ module.exports = {
 ## 二、webpack 中的 `source-map`
 
 ### 2-1、 `devtool` 配置
-

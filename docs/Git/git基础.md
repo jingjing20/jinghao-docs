@@ -1,6 +1,4 @@
----
-title: '常用 Git 命令'
----
+# 常用 Git 命令
 
 ## git config
 
@@ -186,13 +184,13 @@ Date:   Sun Aug 28 00:24:12 2022 +0800
 **操作步骤**
 
 - 1、找到要修改的 `commit` ，本例中的 `1a0c9d8cfe0ca7151519aae4dd6d57188064a5c1` 。
-- 2、执行 git rebase -i <要修改的commitId的前一个commitid>，这里的 `db01629dcefee1cdd4e6f73668dc31c6d02d6364`。这里即执行如下命令：
+- 2、执行 git rebase -i <要修改的 commitId 的前一个 commitid>，这里的 `db01629dcefee1cdd4e6f73668dc31c6d02d6364`。这里即执行如下命令：
 
 ```bash
 git rebase -i <db01629dcefee1cdd4e6f73668dc31c6d02d6364>
 ```
 
-- 3、在 `rebase` 的交互模式下，将要修改的 `commit` 状态由 `pick `  修改为 `edit`。
+- 3、在 `rebase` 的交互模式下，将要修改的 `commit` 状态由 `pick ` 修改为 `edit`。
 - 4、修改后，保存退出`rebase`交互模式，我们会停在该`commit`下（下图中的 `Stopped at 27f749c...  chore: class compiler`），并执行修复操作。
 
 ![image-20220831154423339](../everyday/images/image-20220831154423339.png)
@@ -210,6 +208,7 @@ git rebase -i <db01629dcefee1cdd4e6f73668dc31c6d02d6364>
 - 最后将修改强制推送到远程仓库 `git push origin master --force`
 
 ## git 批量删除分支
+
 ### 批量删除本地分支
 
 ```bash

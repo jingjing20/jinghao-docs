@@ -4,9 +4,9 @@ layout: home
 hero:
     name: web Docs
     text: 生活第一，其他往后捎
-    tagline: 一个想学后端的小前端...
+    tagline: 一个热爱篮球的小前端...
     image:
-        # src: /jing.png
+        src: /home.png
         alt: Docs Vitepress
     actions:
         - theme: brand
