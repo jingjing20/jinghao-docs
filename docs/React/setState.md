@@ -1,6 +1,4 @@
----
-title: 'setState 同步异步问题'
----
+# setState 同步异步问题
 
 ::: danger 特别提醒
 setState 并不是单纯同步/异步的，它的表现会因调用场景的不同而不同：在 React 钩子函数及合成事件中，它表现为异步；而在 setTimeout、setInterval 等函数中，包括在 DOM 原生事件中，它都表现为同步。这种差异，本质上是由 React 事务机制和批量更新机制的工作方式来决定的。
@@ -10,10 +8,10 @@ setState 并不是单纯同步/异步的，它的表现会因调用场景的不�
 
 事实上 setState 内部执行过程是很复杂的，大致过程包括更新 `state`，创建新的 `VNode`，再经过 `diff` 算法比对差异，决定渲染哪一部分以及怎么渲染，最终形成最新的 UI。这一过程包含组件的四个生命周期函数。
 
--   shouldComponentUpdate()
--   componentWillUpdate()
--   render()
--   componentDidUpdate()
+- shouldComponentUpdate()
+- componentWillUpdate()
+- render()
+- componentDidUpdate()
 
 **需要注意的是如果子组件的数据依赖于父组件，还会执行 componentWillReceiveProps() 这个生命周期函数。**
 
@@ -29,81 +27,81 @@ setState 并不是单纯同步/异步的，它的表现会因调用场景的不�
 
 ```js
 class StateDemo extends React.Component {
-	constructor(props) {
-		super(props);
-		// 第一，state 要在构造函数中定义
-		this.state = {
-			count: 0,
-		};
-	}
-	render() {
-		return (
-			<div>
-				<p>{this.state.count}</p>
-				<button onClick={this.increase}>累加</button>
-			</div>
-		);
-	}
-	increase = () => {
-		// 第二，不要直接修改 state ，使用不可变值 ----------------------------
-		// this.state.count++ // 错误
-		this.setState({
-			count: this.state.count + 1,
-		});
-		// 操作数组、对象的的常用形式
+  constructor(props) {
+    super(props);
+    // 第一，state 要在构造函数中定义
+    this.state = {
+      count: 0
+    };
+  }
+  render() {
+    return (
+      <div>
+        <p>{this.state.count}</p>
+        <button onClick={this.increase}>累加</button>
+      </div>
+    );
+  }
+  increase = () => {
+    // 第二，不要直接修改 state ，使用不可变值 ----------------------------
+    // this.state.count++ // 错误
+    this.setState({
+      count: this.state.count + 1
+    });
+    // 操作数组、对象的的常用形式
 
-		// 第三，setState 可能是异步更新（有可能是同步更新） ----------------------------
+    // 第三，setState 可能是异步更新（有可能是同步更新） ----------------------------
 
-		this.setState(
-			{
-				count: this.state.count + 1,
-			},
-			() => {
-				// 联想 Vue $nextTick - DOM
-				console.log('count by callback', this.state.count); // 回调函数中可以拿到最新的 state
-			}
-		);
-		console.log('count', this.state.count); // 异步的，拿不到最新值
+    this.setState(
+      {
+        count: this.state.count + 1
+      },
+      () => {
+        // 联想 Vue $nextTick - DOM
+        console.log('count by callback', this.state.count); // 回调函数中可以拿到最新的 state
+      }
+    );
+    console.log('count', this.state.count); // 异步的，拿不到最新值
 
-		// setTimeout 中 setState 是同步的
-		setTimeout(() => {
-			this.setState({
-				count: this.state.count + 1,
-			});
-			console.log('count in setTimeout', this.state.count);
-		}, 0);
+    // setTimeout 中 setState 是同步的
+    setTimeout(() => {
+      this.setState({
+        count: this.state.count + 1
+      });
+      console.log('count in setTimeout', this.state.count);
+    }, 0);
 
-		// 自己定义的 DOM 事件，setState 是同步的。再 componentDidMount 中
+    // 自己定义的 DOM 事件，setState 是同步的。再 componentDidMount 中
 
-		// 第四，state 异步更新的话，更新前会被合并 ----------------------------
-		// 传入对象，会被合并（类似 Object.assign ）。执行结果只一次 +1
-		this.setState({
-			count: this.state.count + 1,
-		});
-		this.setState({
-			count: this.state.count + 1,
-		});
-		this.setState({
-			count: this.state.count + 1,
-		});
+    // 第四，state 异步更新的话，更新前会被合并 ----------------------------
+    // 传入对象，会被合并（类似 Object.assign ）。执行结果只一次 +1
+    this.setState({
+      count: this.state.count + 1
+    });
+    this.setState({
+      count: this.state.count + 1
+    });
+    this.setState({
+      count: this.state.count + 1
+    });
 
-		// 传入函数，不会被合并。执行结果是 +3
-		this.setState((prevState, props) => {
-			return {
-				count: prevState.count + 1,
-			};
-		});
-		this.setState((prevState, props) => {
-			return {
-				count: prevState.count + 1,
-			};
-		});
-		this.setState((prevState, props) => {
-			return {
-				count: prevState.count + 1,
-			};
-		});
-	};
+    // 传入函数，不会被合并。执行结果是 +3
+    this.setState((prevState, props) => {
+      return {
+        count: prevState.count + 1
+      };
+    });
+    this.setState((prevState, props) => {
+      return {
+        count: prevState.count + 1
+      };
+    });
+    this.setState((prevState, props) => {
+      return {
+        count: prevState.count + 1
+      };
+    });
+  };
 }
 ```
 
@@ -115,32 +113,32 @@ class StateDemo extends React.Component {
 
 ```js
 class Example extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			val: 0,
-		};
-	}
+  constructor() {
+    super();
+    this.state = {
+      val: 0
+    };
+  }
 
-	componentDidMount() {
-		this.setState({ val: this.state.val + 1 });
-		console.log(this.state.val); // 第 1 次 log
+  componentDidMount() {
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val); // 第 1 次 log
 
-		this.setState({ val: this.state.val + 1 });
-		console.log(this.state.val); // 第 2 次 log
+    this.setState({ val: this.state.val + 1 });
+    console.log(this.state.val); // 第 2 次 log
 
-		setTimeout(() => {
-			this.setState({ val: this.state.val + 1 });
-			console.log(this.state.val); // 第 3 次 log
+    setTimeout(() => {
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val); // 第 3 次 log
 
-			this.setState({ val: this.state.val + 1 });
-			console.log(this.state.val); // 第 4 次 log
-		}, 0);
-	}
+      this.setState({ val: this.state.val + 1 });
+      console.log(this.state.val); // 第 4 次 log
+    }, 0);
+  }
 
-	render() {
-		return null;
-	}
+  render() {
+    return null;
+  }
 }
 ```
 
