@@ -11,7 +11,7 @@ hero:
     actions:
         - theme: brand
           text: Get Started
-          link: ./css/flex.md
+          link: ./HTML/HTML集合.md
         - theme: alt
           text: View on GitHub
           link: https://github.com/jingjing20

@@ -84,15 +84,6 @@ const sidebar = [
     ]
   },
   {
-    text: 'Node',
-    // 是否折叠
-    collapsed: false,
-    items: [
-      { text: '常用内置模块', link: '/node/常用内置模块.md' },
-      { text: '模块化相关', link: '/node/模块化相关.md' }
-    ]
-  },
-  {
     text: 'Vue',
     // 是否折叠
     collapsed: false,
@@ -169,6 +160,21 @@ const sidebar = [
       { text: '125、验证回文串', link: '/leetcode/125.验证回文串.md' },
       { text: '1556、千位分隔数', link: '/leetcode/1556.千位分隔数.md' }
     ]
+  },
+  {
+    text: 'Node',
+    // 是否折叠
+    collapsed: false,
+    items: [
+      { text: '常用内置模块', link: '/node/常用内置模块.md' },
+      { text: '模块化相关', link: '/node/模块化相关.md' }
+    ]
+  },
+  {
+    text: 'Mysql',
+    // 是否折叠
+    collapsed: false,
+    items: [{ text: 'mysql必知必会阅读笔记', link: '/mysql/mysql-bizhibihui.md' }]
   },
   {
     text: '代码风格',
