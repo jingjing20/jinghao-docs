@@ -460,3 +460,21 @@ ANV03	1001	2 ton anvil	14.99	2 ton anvil, black, complete with handy hook and ca
 ### 拼接字段
 
 - 在 `MySQL` 的 `SELECT` 语句中，可使用 `Concat()` 函数来拼接两个列。
+
+```sql
+SELECT CONCAT(vend_name,'(', vend_country, ')') FROM vendors ORDER BY vend_name;
+```
+
+- `Concat()`需要一个或多个指定的串，各个串之间用逗号分隔。上面的 `SELECT` 语句连接以下 4 个元素：
+  - 存储在 `vend_name` 列中的名字；
+  - 包含一个空格和一个左圆括号的串；
+  - 存储在 `vend_country` 列中的国家；
+  - 包含一个右圆括号的串。
+
+### 使用别名
+
+- 别名（alias）是一个字段或值的替换名。别名用 AS 关键字赋予
+
+```sql
+SELECT CONCAT(vend_name,'(', vend_country, ')') AS vend_title FROM vendors ORDER BY vend_name;
+```
