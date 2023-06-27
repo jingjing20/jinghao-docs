@@ -478,3 +478,32 @@ SELECT CONCAT(vend_name,'(', vend_country, ')') FROM vendors ORDER BY vend_name;
 ```sql
 SELECT CONCAT(vend_name,'(', vend_country, ')') AS vend_title FROM vendors ORDER BY vend_name;
 ```
+
+### 执行算术计算
+
+
+## 使用数据处理函数
+
+### 文本处理函数
+
+| 函数名称       | 描述                                                         |
+|----------------|--------------------------------------------------------------|
+| `CONCAT()`     | 将两个或多个字符串连接在一起                                   |
+| `SUBSTRING()`  | 返回一个字符串的子串                                           |
+| `LEFT()`       | 返回字符串的左边指定数量的字符                                 |
+| `RIGHT()`      | 返回字符串的右边指定数量的字符                                 |
+| `LENGTH()`     | 返回一个字符串的字符个数                                       |
+| `LOWER()`      | 将字符串转换为小写                                             |
+| `UPPER()`      | 将字符串转换为大写                                             |
+| `REPLACE()`    | 替换字符串中的指定子串                                         |
+| `TRIM()`       | 去除字符串开头或末尾的空格或指定字符                           |
+| `REVERSE()`    | 反转字符串的顺序                                               |
+| `SUBSTRING_INDEX()` | 返回一个字符串在指定分隔符出现的指定次数后的子串                |
+| `REGEXP_REPLACE()` | 用正则表达式替换字符串中的指定内容                             |
+| `INSERT()`     | 将一个字符串插入到另一个字符串的指定位置                       |
+| `LOCATE()`     | 返回一个子串在字符串中第一次出现的位置                         |
+| `CHAR_LENGTH()` | 返回一个字符串的字符数（与 `LENGTH()` 类似，但计算方式不同）    |
+| `CONCAT_WS()`  | 将多个字符串连接在一起，使用指定的分隔符                       |
+| `FIND_IN_SET()` | 在一个逗号分隔的字符串列表中查找一个值的位置                   |
+| `JSON_EXTRACT()` | 从 JSON 字符串中提取指定的数据                                 |
+| `JSON_UNQUOTE()` | 去除 JSON 字符串中的引号                                       |
