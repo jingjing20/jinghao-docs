@@ -152,6 +152,11 @@ const sidebar = [
     // 是否折叠
     collapsed: false,
     items: [
+      {
+        text: '链表相关',
+        collapsed: false,
+        items: [{ text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' }]
+      },
       { text: '3、无重复字符的最长子串', link: '/leetcode/3.无重复字符的最长子串.md' },
       { text: '20、有效的括号', link: '/leetcode/20.有效的括号.md' },
       { text: '66、加一', link: '/leetcode/66.加一.md' },
