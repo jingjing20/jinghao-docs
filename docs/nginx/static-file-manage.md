@@ -8,7 +8,7 @@
 ![run container](image.png)
 
 - 这里设置镜像名称 `nginx1` 本机端口设置为 `81`
-- 打开浏览器访问 http://localhost:81/ 就能看到欢迎页面
+- 打开浏览器访问 `http://localhost:81/` 就能看到欢迎页面
 
 ![nginx welcome](image-1.png)
 
@@ -156,7 +156,7 @@ location / {
 
 - 它就配置了 / 下的所有路由，都是在 root 指定的目录查找。
 
-- 所以 http://localhost/test-popover.html 就是从 /usr/share/nginx/html/test-popover.html 找的。
+- 所以 `http://localhost/test-popover.html` 就是从 /usr/share/nginx/html/test-popover.html 找的。
 
 - location 支持的语法有好几个，我们分别试一下
 - 在 default.conf 中添加下面几个匹配规则
@@ -177,7 +177,7 @@ location ~ ^/jing/hao.*\.html$ {
     return 200 $uri;
 }
 
-location ~* ^/888/AAA.*\.html$ {
+location ~* ^/hao/Jing.*\.html$ {
     default_type text/plain;
     return 200 $uri;
 }
@@ -223,7 +223,7 @@ location /222 {
 
 ![Alt text](image-8.png)
 
-### 正则匹配
+### 正则匹配[区分大小写]
 
 ```sh
 location ~ ^/jing/hao.*\.html$ {
@@ -238,3 +238,156 @@ location ~ ^/jing/hao.*\.html$ {
 ![Alt text](image-9.png)
 
 ![Alt text](image-10.png)
+
+- 但是正则匹配是区分大小写的，比如这样访问就会 404
+
+![Alt text](image-11.png)
+
+### 正则匹配[不区分大小写]
+
+```sh
+location ~* ^/hao/Jing.*\.html$ {
+    default_type text/plain;
+    return 200 $uri;
+}
+```
+
+- 如果想让正则不区分大小写，可以再加个 `*`
+
+![Alt text](image-12.png)
+
+### 优先级
+
+- 在配置文件再加上这个配置，然后 reload 一下 nginx
+
+```sh
+location /hao {
+    default_type text/plain;
+    return 200 'xxxx';
+}
+```
+
+- 现在配置文件中有两个以 `/hao` 开头的匹配规则：`~* ^/hao/Jing.*\.html$` 和 `/hao`
+- 再次访问一个以 `/hao` 开头的 `url`，表现形式如下图：
+
+![Alt text](image-13.png)
+
+![Alt text](image-12.png)
+
+- 如果想要提高 `/hao` 匹配规则的优先级，需要在 `location` 的后面添加 `^~`
+
+```sh
+location ^~ /hao {
+    default_type text/plain;
+    return 200 'xxxx';
+}
+```
+
+- 修改一下 default.conf ，然后重启一下 nginx ，再次访问刚才的 url
+
+![Alt text](image-14.png)
+
+- 这次会发现优先匹配上了 `/hao` 这个规则
+
+### location 配置总结
+
+::: info location
+
+- `location = /aaa` 是精确匹配 `/aaa` 的路由。
+
+- `location /bbb` 是前缀匹配 `/bbb` 的路由。
+
+- `location ~ /ccc.*.html` 是正则匹配。可以再加个 `*` 表示不区分大小写 `location ~* /ccc.*.html`
+
+- `location ^~ /ddd` 是前缀匹配，但是优先级更高。
+
+- 这 4 种语法的优先级是这样的：
+
+- 精确匹配 > 高优先级前缀匹配 > 正则匹配 > 普通前缀匹配
+
+:::
+
+## alias vs root
+
+::: tip
+- `root` 和 `alias` 的区别就是 <font color="#7B68EE">**在匹配文件路径时是否包含匹配条件的路径**</font>
+- `root` 会把匹配条件的路径一并拼接到文件路径的<font color="#7B68EE">后面</font> `alias` 不会。
+:::
+
+### 举个例子
+
+```sh
+location ^~ /hao {
+    default_type text/plain;
+    alias /usr/share/nginx/html;
+}
+
+location ^~ /hao {
+    default_type text/plain;
+    root /usr/share/nginx/html;
+}
+```
+
+### alias
+
+- 可以先这样改一下 `default.conf` 配置文件
+
+```sh
+location ^~ /hao {
+    default_type text/plain;
+    alias /usr/share/nginx/html;
+}
+```
+
+- 再上传两个文件到 `/usr/share/nginx/html`
+
+![Alt text](image-15.png)
+
+::: info
+
+- 然后打开浏览器访问一下 `http://localhost:81/hao/jing.html`
+- 因为现在采用的是 `alias`，访问 `http://localhost:81/hao/jing.html` 去 `nginx` 中查文件的时候不会把前缀 `/hao` 加上
+- 即访问的真实路径是 <font color="#32CD32">`/usr/share/nginx/html/jing.html`</font>，是能正常请求到内容的。
+
+:::
+
+![Alt text](image-16.png)
+
+
+### root
+
+- 可以再这样改一下 `default.conf` 配置文件
+
+```sh
+location ^~ /hao {
+    default_type text/plain;
+    root /usr/share/nginx/html;
+}
+```
+
+::: info
+
+- 然后打开浏览器访问一下 `http://localhost:81/hao/jing.html`
+- 因为现在采用的是 `root`，访问 `http://localhost:81/hao/jing.html` 去 `nginx` 中查文件的时候会把前缀 `/hao` 加上
+- 即访问的真实路径是 <font color="#32CD32">`/usr/share/nginx/html/hao/jing.html`</font>
+- 这个路径不存在，所以是不能正常请求到内容的，返回的是 `404` 页面。
+
+:::
+
+![Alt text](image-17.png)
+
+- 我们可以新建一个 `hao` 文件夹，里面放同样的两个 `html`文件，然后拷贝至容器中
+
+![Alt text](image-18.png)
+
+- 终端重启一下 `nginx` ，访问 `http://localhost:81/hao/jing.html`
+- 结果发现没有成功返回对应的 `html` ， 也没有 `404` ，而是提示 `403` 没有权限
+
+![Alt text](image-20.png)
+
+- 是因为 `nginx` 默认的执行用户是 `nginx` ，上面 `nginx.conf` 里面第一行有写： `user  nginx;`
+- 这里只需要把 `user` 改成 `root` 就可以了
+- 改完 `nginx.conf` 重启 `nginx` 打开浏览器重新访问就能正常访问了
+
+![Alt text](image-19.png)
+
