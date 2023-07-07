@@ -182,10 +182,19 @@ const sidebar = [
     items: [{ text: 'mysql必知必会阅读笔记', link: '/mysql/mysql-bizhibihui.md' }]
   },
   {
+    text: 'docker',
+    // 是否折叠
+    collapsed: false,
+    items: [{ text: 'docker 基础', link: '/docker/base.md' }]
+  },
+  {
     text: 'nginx',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'nginx 静态文件托管', link: '/nginx/static-file-manage.md' }]
+    items: [
+      { text: 'nginx 静态文件托管', link: '/nginx/static-file-manage/index.md' },
+      { text: 'nginx 反向代理', link: '/nginx/reverse-proxy/index.md' }
+    ]
   },
   {
     text: '代码风格',

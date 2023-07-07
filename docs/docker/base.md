@@ -1,6 +1,14 @@
-## docker 基础
+# docker 基础
 
-### dockerfile 解释
+- `Docker` 是一种容器技术，它可以在操作系统上创建多个相互隔离的容器。容器内可以独立安装软件、运行服务。
+
+![Alt text](image.png)
+
+- 但是，这个容器和宿主机还是有关联的，比如可以把宿主机的端口映射到容器内的端口、宿主机某个目录挂载到容器内的目录。
+
+![Alt text](image-1.png)
+
+## dockerfile 解释
 
 ```shell
 FROM node:18
@@ -24,28 +32,28 @@ EXPOSE 3000
 CMD [ "node", "./dist/main.js" ]
 ```
 
-- FROM node:18 是继承 node:18 基础镜像。
+- FROM `node:18` 是继承 `node:18` 基础镜像。
 
-- WORKDIR /app 是指定当前目录为 /app
+- `WORKDIR /app` 是指定当前目录为 `/app`
 
-- COPY 复制宿主机的 package.json 和 lock 文件到容器的当前目录，也就是 /app 下
+- `COPY` 复制宿主机的 `package.json` 和 `lock` 文件到容器的当前目录，也就是 `/app` 下
 
-- RUN 是执行命令，这里执行了 npm install。
+- `RUN` 是执行命令，这里执行了 `npm install`。
 
 - 然后再复制其余的文件到容器内。
 
-- EXPOSE 指定容器需要暴露的端口是 3000。
+- `EXPOSE` 指定容器需要暴露的端口是 `3000`
 
-- CMD 指定容器跑起来时执行的命令是 node ./dist/main.js。
+- `CMD` 指定容器跑起来时执行的命令是 `node ./dist/main.js`
 
-### 构建镜像命令
+## 构建镜像命令
 
 ```shell
 docker build -t dockerfile-test:first .
 ```
 
-- -t 是指定名字和标签，这里镜像名为 dockerfile-test 标签为 first
-- 最后面的 . 指的是构建路径为当前根目录
+- `-t` 是指定名字和标签，这里镜像名为 `dockerfile-test` 标签为 `first`
+- 最后面的 `.` 指的是构建路径为当前根目录，默认会在当前目录下找 `dockerfile` 文件，如果不是当前目录，可以指定 `dockerfile` 文件的路径。
 
 ### 运行容器命令
 

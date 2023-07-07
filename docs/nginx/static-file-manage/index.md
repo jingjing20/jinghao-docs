@@ -133,17 +133,17 @@ server {
 
 ```
 
-- 这里面配置了 localhost:80 虚拟主机下的所有路由。
+- 这里面配置了 `localhost:80` 虚拟主机下的所有路由。
 
 - 虚拟主机是什么呢？
 
-- 就是可以用一台 nginx 服务器来为多个域名和端口的提供服务。
+- 就是可以用一台 `nginx` 服务器来为多个域名和端口的提供服务。
 
-- 只要多加几个 server 配置就可以。
+- 只要多加几个 `server` 配置就可以。
 
-- 这里我们就配置 localhost:80 这一个虚拟主机。
+- 这里我们就配置 `localhost:80` 这一个虚拟主机。
 
-- 下面的 location 就是路由配置。
+- 下面的 `location` 就是路由配置。
 
 - 比如这个配置：
 
@@ -154,12 +154,12 @@ location / {
 }
 ```
 
-- 它就配置了 / 下的所有路由，都是在 root 指定的目录查找。
+- 它就配置了 `/` 下的所有路由，都是在 `root` 指定的目录查找。
 
-- 所以 `http://localhost/test-popover.html` 就是从 /usr/share/nginx/html/test-popover.html 找的。
+- 所以 `http://localhost/test-popover.html` 就是从 `/usr/share/nginx/html/test-popover.html` 找的。
 
-- location 支持的语法有好几个，我们分别试一下
-- 在 default.conf 中添加下面几个匹配规则
+- `location` 支持的语法有挺多，我们分别试一下
+- 在 `default.conf` 中添加下面几个匹配规则
 
 ```sh
 location = /111/ {
