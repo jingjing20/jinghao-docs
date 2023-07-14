@@ -84,6 +84,12 @@ const sidebar = [
     ]
   },
   {
+    text: 'typescript',
+    // 是否折叠
+    collapsed: false,
+    items: [{ text: 'decorator', link: '/typescript/decorator.md' }]
+  },
+  {
     text: 'Vue',
     // 是否折叠
     collapsed: false,
@@ -179,9 +185,7 @@ const sidebar = [
     text: 'nest',
     // 是否折叠
     collapsed: false,
-    items: [
-      { text: 'nest基础', link: '/nest/base.md' },
-    ]
+    items: [{ text: 'nest基础', link: '/nest/base.md' }]
   },
   {
     text: 'mysql',
