@@ -167,7 +167,7 @@ const sidebar = [
     ]
   },
   {
-    text: 'Node',
+    text: 'node',
     // 是否折叠
     collapsed: false,
     items: [
@@ -176,7 +176,15 @@ const sidebar = [
     ]
   },
   {
-    text: 'Mysql',
+    text: 'nest',
+    // 是否折叠
+    collapsed: false,
+    items: [
+      { text: 'nest基础', link: '/nest/base.md' },
+    ]
+  },
+  {
+    text: 'mysql',
     // 是否折叠
     collapsed: false,
     items: [{ text: 'mysql必知必会阅读笔记', link: '/mysql/mysql-bizhibihui.md' }]
