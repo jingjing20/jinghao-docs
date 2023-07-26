@@ -133,6 +133,7 @@ const sidebar = [
     // 是否折叠
     collapsed: false,
     items: [
+      { text: '跨域相关', link: '/browser/跨域相关.md' },
       { text: '浏览器缓存', link: '/browser/浏览器缓存.md' },
       { text: '浏览器的本地存储', link: '/browser/浏览器的本地存储.md' },
       { text: '从输入URL到页面加载完成', link: '/browser/从输入URL到页面加载完成的过程.md' }
