@@ -87,7 +87,10 @@ const sidebar = [
     text: 'typescript',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'decorator', link: '/typescript/decorator.md' }]
+    items: [
+      { text: 'tsconfig', link: '/typescript/tsconfig.md' },
+      { text: 'decorator', link: '/typescript/decorator.md' }
+    ]
   },
   {
     text: 'Vue',
