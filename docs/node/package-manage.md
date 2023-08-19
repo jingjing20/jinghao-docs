@@ -11,6 +11,8 @@
 - `npm list`: 列出项目的所有依赖及其版本。
 - `npm search <package-name>`: 搜索一个 npm 包。
 - `npm init`: 初始化一个新的 npm 项目，生成 package.json 文件。
+- `npm config get registry` 查看当前使用的源
+- `npm config set registry https://registry.npm.taobao.org/` 切换源到淘宝源
 
 ### Yarn:
 
@@ -21,6 +23,8 @@
 - `yarn list`: 列出项目的所有依赖及其版本。
 - `yarn search <package-name>`: 搜索一个包。
 - `yarn init`: 初始化一个新的项目，生成 package.json 文件。
+- `yarn config get registry` 查看当前使用的源
+- `yarn config set registry https://registry.npm.taobao.org/` 切换源到淘宝源
 
 ### pnpm:
 
@@ -31,7 +35,8 @@
 - `pnpm ls`: 列出项目的所有依赖及其版本。
 - `pnpm search <package-name>`: 搜索一个包。
 - `pnpm init`: 初始化一个新的项目，生成 package.json 文件。
-
+- `pnpm config get registry` 查看当前使用的源
+- `pnpm config set registry https://registry.npm.taobao.org/` 切换源到淘宝源
 
 ## 查看和切换工具源的命令
 
@@ -52,4 +57,3 @@
 - 查看当前使用的源：`pnpm config get registry`
 - 切换源到官方源：`pnpm config set registry https://registry.npmjs.org/`
 - 切换源到淘宝源：`pnpm config set registry https://registry.npm.taobao.org/`
-
