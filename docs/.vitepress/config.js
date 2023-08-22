@@ -196,7 +196,10 @@ const sidebar = [
     text: 'mysql',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'mysql必知必会阅读笔记', link: '/mysql/mysql-bizhibihui.md' }]
+    items: [
+      { text: 'mysql必知必会阅读笔记', link: '/mysql/mysql-bizhibihui.md' },
+      { text: 'nest小册mysql练习', link: '/mysql/nest-mysql.md' }
+    ]
   },
   {
     text: 'docker',
