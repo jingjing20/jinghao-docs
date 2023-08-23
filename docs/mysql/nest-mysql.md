@@ -208,3 +208,54 @@ SELECT customers.name, orders.order_date, orders.total_amount,
 - 因为这里的 `order_date` 是 `date` 类型，所以指定范围也只是用 `2022-01-01` 这种格式的。如果是 `datetime`，那就要用 `2022-01-01 10:10:00` 这种格式了。
 - `WHERE` 过滤的时候，可以用 `AND` 或者 `OR` 来连接多个条件，也可以用 `IN` 来过滤多个值。
 - 还可以模糊匹配等等，这里不再赘述。详见上一篇文章：[mysql 必知必会阅读笔记](./mysql-bizhibihui.md)
+
+### 练习 4：查询每个客户的订单总金额，并计算商品数量，只包含商品名称包含“鞋”的商品，商品名用-连接：
+
+- 查询订单总金额和商品数量都需要用 group by 根据 customer.id 分组
+- 过滤出只包含鞋的商品
+- 把分组的多条商品名连接起来需要用 GROUP_CONCAT 函数。
+
+```sql
+SELECT
+	c.name AS customer_name,
+	SUM(o.total_amount) AS total_amount,
+	COUNT(oi.id) AS total_quantity,
+	GROUP_CONCAT(oi.product_name SEPARATOR '-') AS product_names
+    FROM customers c
+    JOIN orders o ON c.id = o.customer_id
+    JOIN order_items oi ON o.id = oi.order_id
+    WHERE oi.product_name LIKE '%鞋%'
+    GROUP BY c.name
+    ORDER BY total_amount DESC
+```
+
+- GROUP_CONCAT 函数是用于 group by 分组后，把多个值连接成一个字符串的。
+
+### 练习 5：将张丽娜的订单总金额打九折
+
+- 这里需要用到 `CASE WHEN` 条件表达式，可以根据条件来返回不同的值。
+
+```sql
+SELECT customers.name, SUM(orders.total_amount) AS total_amount,
+	CASE customers.name
+		WHEN '张丽娜' THEN SUM(orders.total_amount) * 0.9
+		ELSE SUM(orders.total_amount)
+	END AS discounted_total_amount
+	FROM customers
+	INNER JOIN orders ON customers.id = orders.customer_id
+	GROUP BY customers.id;
+```
+
+- 这里用 `CASE WHEN` 来判断客户名是否是 `张丽娜`，如果是，就返回总金额的 0.9 倍，否则返回原来的值。
+- `CASE WHEN` 语法如下：
+
+```sql
+CASE
+	WHEN condition1 THEN result1
+	WHEN condition2 THEN result2
+	...
+	ELSE result
+END
+```
+
+- `CASE WHEN` 语法可以有多个 `WHEN`，每个 `WHEN` 后面都可以跟一个 `THEN`，最后可以有一个 `ELSE`，表示当所有 `WHEN` 都不满足的时候，返回的值。
