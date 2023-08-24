@@ -233,29 +233,11 @@ SELECT
 
 ### 练习 5：将张丽娜的订单总金额打九折
 
-- 这里需要用到 `CASE WHEN` 条件表达式，可以根据条件来返回不同的值。
+- 这里用户名为王磊的用户不止一条，所以用 `IN` 来指定一个集合。
 
 ```sql
-SELECT customers.name, SUM(orders.total_amount) AS total_amount,
-	CASE customers.name
-		WHEN '张丽娜' THEN SUM(orders.total_amount) * 0.9
-		ELSE SUM(orders.total_amount)
-	END AS discounted_total_amount
-	FROM customers
-	INNER JOIN orders ON customers.id = orders.customer_id
-	GROUP BY customers.id;
+UPDATE orders o SET o.total_amount = o.total_amount * 0.9
+    WHERE o.customer_id IN (
+        SELECT id FROM customers WHERE name = '张丽娜'
+    );
 ```
-
-- 这里用 `CASE WHEN` 来判断客户名是否是 `张丽娜`，如果是，就返回总金额的 0.9 倍，否则返回原来的值。
-- `CASE WHEN` 语法如下：
-
-```sql
-CASE
-	WHEN condition1 THEN result1
-	WHEN condition2 THEN result2
-	...
-	ELSE result
-END
-```
-
-- `CASE WHEN` 语法可以有多个 `WHEN`，每个 `WHEN` 后面都可以跟一个 `THEN`，最后可以有一个 `ELSE`，表示当所有 `WHEN` 都不满足的时候，返回的值。

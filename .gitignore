@@ -111,3 +111,5 @@ config/*.key
 
 #  npm 源
 .npmrc
+
+cache
