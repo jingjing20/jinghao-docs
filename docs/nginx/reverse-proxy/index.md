@@ -46,7 +46,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-- 访问一下 http://localhost:3000/api
+- 访问一下 `http://localhost:3000/api`
 
 ![Alt text](image-1.png)
 
@@ -56,7 +56,7 @@ bootstrap();
 
 ![Alt text](image-2.png)
 
-- 访问一下 http://localhost:81
+- 访问一下 `http://localhost:81`
 
 ![Alt text](image-3.png)
 
@@ -85,7 +85,7 @@ server {
 
 - 这个路由是根据前缀匹配 `/api` 开头的 `url`， `^~` 是提高优先级用的。
 
-- 重启一下 `nginx` 容器，访问一下 http://localhost:81/api
+- 重启一下 `nginx` 容器，访问一下 `http://localhost:81/api`
 
 ![Alt text](image-4.png)
 
