@@ -211,12 +211,52 @@ git rebase -i <db01629dcefee1cdd4e6f73668dc31c6d02d6364>
 
 ### 批量删除本地分支
 
+- 直接命令行执行
+
 ```bash
 git branch | grep "feature/jing" | xargs git branch -D
 ```
 
+- 封装成脚本
+
+```bash
+
+#!/bin/bash
+
+# 获取所有分支（排除主分支）
+branches=$(git branch | grep -v "main\|master")
+
+# 循环删除每个分支
+for branch in $branches; do
+    git branch -d $branch
+done
+
+
+```
+
 ### 批量删除远程分支
+
+- 直接命令行执行
 
 ```bash
 git branch -r | grep  'cluster_manage' | sed 's/origin\///g' | xargs -I {} git push origin :{}
+```
+
+- 封装成脚本
+
+```bash
+
+#!/bin/bash
+
+# 获取所有远程分支（排除主分支）
+branches=$(git branch -r | grep -v "origin/main\|origin/master")
+
+# 循环删除每个远程分支
+for branch in $branches; do
+    remote_branch=$(echo $branch | sed 's/origin\///')
+    git push origin --delete $remote_branch
+done
+
+
+
 ```
