@@ -142,10 +142,10 @@ const sidebar = [
     ]
   },
   {
-    text: '玩转Git',
+    text: 'git',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'git基础', link: '/Git/git基础.md' }]
+    items: [{ text: 'git-base', link: '/git/git-base.md' }]
   },
   {
     text: '网络相关',
