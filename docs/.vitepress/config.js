@@ -79,7 +79,8 @@ const sidebar = [
       { text: '闭包', link: '/JavaScript/闭包.md' },
       { text: 'this', link: '/JavaScript/this.md' },
       { text: 'someques', link: '/JavaScript/someques.md' },
-      { text: '无敌手写秘籍', link: '/JavaScript/无敌手写秘籍.md' }
+      { text: '无敌手写秘籍', link: '/JavaScript/无敌手写秘籍.md' },
+      { text: 'ES6', link: '/JavaScript/es6/index.md' },
     ]
   },
   {
