@@ -80,7 +80,7 @@ const sidebar = [
       { text: 'this', link: '/JavaScript/this.md' },
       { text: 'someques', link: '/JavaScript/someques.md' },
       { text: '无敌手写秘籍', link: '/JavaScript/无敌手写秘籍.md' },
-      { text: 'ES6', link: '/JavaScript/es6/index.md' },
+      { text: 'ES6', link: '/JavaScript/es6/index.md' }
     ]
   },
   {
@@ -163,9 +163,14 @@ const sidebar = [
     collapsed: false,
     items: [
       {
-        text: '链表相关',
+        text: '链表',
         collapsed: false,
         items: [{ text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' }]
+      },
+      {
+        text: '双指针',
+        collapsed: false,
+        items: [{ text: '88.合并两个有序数组', link: '/leetcode/双指针/88.合并两个有序数组.md' }]
       },
       { text: '3、无重复字符的最长子串', link: '/leetcode/3.无重复字符的最长子串.md' },
       { text: '20、有效的括号', link: '/leetcode/20.有效的括号.md' },
