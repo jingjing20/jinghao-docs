@@ -175,3 +175,7 @@ const obj = Object.assign({}, v1, null, v2, undefined, v3, v4);
 // 注意，只有字符串的包装对象才可能有自身可枚举属性。
 console.log(obj); // { "0": "a", "1": "b", "2": "c" }
 ```
+
+## Math.random 的安全风险
+
+[见张鑫旭大佬文章](https://www.zhangxinxu.com/wordpress/2021/12/js-getrandomvalue-math-random/)
