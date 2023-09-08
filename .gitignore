@@ -115,3 +115,5 @@ config/*.key
 cache
 
 .vscode
+
+test.js
