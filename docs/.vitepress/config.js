@@ -175,7 +175,10 @@ const sidebar = [
       {
         text: '集合相关',
         collapsed: false,
-        items: [{ text: '128. 最长连续序列', link: '/leetcode/集合相关/128. 最长连续序列.md' }]
+        items: [
+          { text: '49.字母异位词分组', link: '/leetcode/集合相关/49.字母异位词分组.md' },
+          { text: '128.最长连续序列', link: '/leetcode/集合相关/128.最长连续序列.md' }
+        ]
       },
       { text: '3、无重复字符的最长子串', link: '/leetcode/3.无重复字符的最长子串.md' },
       { text: '20、有效的括号', link: '/leetcode/20.有效的括号.md' },
