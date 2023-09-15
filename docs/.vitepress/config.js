@@ -170,7 +170,10 @@ const sidebar = [
       {
         text: '双指针',
         collapsed: false,
-        items: [{ text: '88.合并两个有序数组', link: '/leetcode/双指针/88.合并两个有序数组.md' }]
+        items: [
+          { text: '15.三数之和', link: '/leetcode/双指针/15.三数之和.md' },
+          { text: '88.合并两个有序数组', link: '/leetcode/双指针/88.合并两个有序数组.md' }
+        ]
       },
       {
         text: '集合相关',
