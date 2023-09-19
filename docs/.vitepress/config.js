@@ -305,7 +305,7 @@ module.exports = {
   // 站点说明
   description: '婧婧的成长之路，包含前端常用知识、源码阅读笔记、、日常问题汇总和提效工具等',
   // base URL
-  base: '/jinghao-docs/',
+  base: '/',
   // 站点lang
   lang: 'zh-CN',
   // 是否显示更新时间
