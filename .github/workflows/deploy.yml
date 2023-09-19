@@ -27,4 +27,4 @@ jobs:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           publish_dir: docs/.vitepress/dist
-          # cname: example.com # if wanna deploy to custom domain
+          cname: blog.wangzhihao.top # if wanna deploy to custom domain

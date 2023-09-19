@@ -160,36 +160,62 @@ const sidebar = [
   {
     text: 'LeetCode',
     // 是否折叠
-    collapsed: false,
+    collapsed: true,
     items: [
       {
+        text: '栈',
+        collapsed: true,
+        items: [
+          { text: '20、有效的括号', link: '/leetcode/栈/20.有效的括号.md' },
+          { text: '402、移掉k位数', link: '/leetcode/栈/402.移掉k位数.md' }
+        ]
+      },
+      {
+        text: '树',
+        collapsed: true,
+        items: [{ text: '101、对称二叉树', link: '/leetcode/树/101.对称二叉树.md' }]
+      },
+      {
         text: '链表',
-        collapsed: false,
+        collapsed: true,
         items: [{ text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' }]
       },
       {
         text: '双指针',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '15.三数之和', link: '/leetcode/双指针/15.三数之和.md' },
-          { text: '88.合并两个有序数组', link: '/leetcode/双指针/88.合并两个有序数组.md' }
+          { text: '88.合并两个有序数组', link: '/leetcode/双指针/88.合并两个有序数组.md' },
+          { text: '125、验证回文串', link: '/leetcode/双指针/125.验证回文串.md' }
         ]
       },
       {
         text: '集合相关',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: '49.字母异位词分组', link: '/leetcode/集合相关/49.字母异位词分组.md' },
           { text: '128.最长连续序列', link: '/leetcode/集合相关/128.最长连续序列.md' }
         ]
       },
-      { text: '3、无重复字符的最长子串', link: '/leetcode/3.无重复字符的最长子串.md' },
-      { text: '20、有效的括号', link: '/leetcode/20.有效的括号.md' },
-      { text: '66、加一', link: '/leetcode/66.加一.md' },
-      { text: '70、爬楼梯', link: '/leetcode/70.爬楼梯.md' },
-      { text: '101、对称二叉树', link: '/leetcode/101.对称二叉树.md' },
-      { text: '125、验证回文串', link: '/leetcode/125.验证回文串.md' },
-      { text: '1556、千位分隔数', link: '/leetcode/1556.千位分隔数.md' }
+      {
+        text: '滑动窗口',
+        collapsed: true,
+        items: [{ text: '3、无重复字符的最长子串', link: '/leetcode/滑动窗口/3.无重复字符的最长子串.md' }]
+      },
+
+      {
+        text: '动态规划',
+        collapsed: true,
+        items: [{ text: '70、爬楼梯', link: '/leetcode/动态规划/70.爬楼梯.md' }]
+      },
+      {
+        text: '其他',
+        collapsed: true,
+        items: [
+          { text: '66、加一', link: '/leetcode/其他/66.加一.md' },
+          { text: '1556、千位分隔数', link: '/leetcode/其他/1556.千位分隔数.md' }
+        ]
+      }
     ]
   },
   {
