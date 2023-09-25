@@ -68,7 +68,7 @@ const sidebar = [
   {
     text: 'JavaScript',
     // 是否折叠
-    collapsed: false,
+    collapsed: true,
     items: [
       { text: 'JS大杂烩', link: '/JavaScript/JS大杂烩.md' },
       { text: '数组相关', link: '/JavaScript/数组相关.md' },
@@ -95,7 +95,7 @@ const sidebar = [
   {
     text: 'Vue',
     // 是否折叠
-    collapsed: false,
+    collapsed: true,
     items: [
       { text: 'vuejichu', link: '/Vue/vuejichu.md' },
       { text: 'vuecomponent', link: '/Vue/vuecomponent.md' },
@@ -232,7 +232,7 @@ const sidebar = [
     text: 'nest',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'nest基础', link: '/nest/base.md' }]
+    items: [{ text: 'typeorm', link: '/nest/typeorm.md' }]
   },
   {
     text: 'mysql',
