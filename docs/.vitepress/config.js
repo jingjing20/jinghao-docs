@@ -53,7 +53,7 @@ const sidebar = [
     text: 'HTML',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'HTML集合', link: '/HTML/HTML集合.md' }]
+    items: [{ text: 'html相关', link: '/html/html-base.md' }]
   },
   {
     text: 'CSS',
