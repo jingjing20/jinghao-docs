@@ -247,7 +247,10 @@ const sidebar = [
     text: 'docker',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'docker 基础', link: '/docker/base.md' }]
+    items: [
+      { text: 'docker base', link: '/docker/base/base.md' },
+      { text: 'docker compose', link: '/docker/compose/compose.md' }
+    ]
   },
   {
     text: 'nginx',
