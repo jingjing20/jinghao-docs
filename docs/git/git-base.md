@@ -207,6 +207,36 @@ git rebase -i <db01629dcefee1cdd4e6f73668dc31c6d02d6364>
 
 - 最后将修改强制推送到远程仓库 `git push origin master --force`
 
+### 根据某个 <span style="color: #00FF00">特殊字符查询历史 commit</span>
+
+要查询 Git 历史的 commit 信息中是否包含特定字符，您可以使用 `git log` 命令结合 `--grep` 选项。以下是如何执行这个查询的步骤：
+
+```shell
+git log --grep="特定字符"
+```
+
+- 在上述命令中，将 "特定字符" 替换为您要搜索的实际字符串。执行这个命令后，Git 将显示包含指定字符的所有 commit 信息。
+
+- 如果要进一步筛选结果，您可以添加其他选项。例如，您可以使用 `--author` 选项来筛选特定作者的提交，或使用 `--since` 和 `--until` 选项来限定日期范围。
+
+- 1. 查询 commit 中包含字符串 "bug" 的信息：
+
+```shell
+git log --grep="bug"
+```
+
+- 2. 查询 commit 中包含字符串 "feature" 的信息，并限制日期范围：
+
+```shell
+git log --grep="feature" --since="2022-01-01" --until="2022-12-31"
+```
+
+- 3. 查询 commit 中包含字符串 "fix" 并由特定作者提交的信息：
+
+```shell
+git log --grep="fix" --author="John Doe"
+```
+
 ## git 批量删除分支
 
 ### 批量删除本地分支
