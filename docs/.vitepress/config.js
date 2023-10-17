@@ -232,7 +232,10 @@ const sidebar = [
     text: 'nest',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'typeorm', link: '/nest/typeorm.md' }]
+    items: [
+      { text: 'typeorm', link: '/nest/typeorm.md' },
+      { text: 'nest中的定时任务', link: '/nest/scheduled-tasks/scheduled-tasks.md' }
+    ]
   },
   {
     text: 'mysql',
