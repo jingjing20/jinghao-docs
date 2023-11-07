@@ -117,10 +117,13 @@ const sidebar = [
     ]
   },
   {
-    text: '构建工具',
+    text: 'webpack',
     // 是否折叠
     collapsed: false,
-    items: [{ text: 'webpack', link: '/build_tools/webpack.md' }]
+    items: [
+      { text: 'base', link: '/webpack/base/base.md' },
+      { text: 'code-splitting', link: '/webpack/code-splitting/index.md' }
+    ]
   },
   {
     text: '正则表达式',

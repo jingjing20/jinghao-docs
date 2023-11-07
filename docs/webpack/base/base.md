@@ -1,8 +1,6 @@
-# coderwhy webpack 学习笔记
+# webpack 基础
 
-## 一、邂逅`webpack`以及初体验
-
-### 1-1、 `webpack` 的依赖关系图
+## `webpack` 的依赖关系图
 
 > webpack 到底是如何对我们的项目进行打包的呢？
 
@@ -17,9 +15,9 @@
 - 3、假如有个 js 文件里面有函数，js 确实被引用了，但是函数未被执行，函数也不会被打包。
   其中涉及到`tree shaking`的概念。
 
-<img src="./imgs/webpack_main.png"/>
+<img src="webpack_main.png"/>
 
-### 1-2、`loader 配置`
+## `loader 配置`
 
 :::tip
 `webpack` 默认只能处理 `JavaScript` 和 `JSON` 文件，这是 `webpack` 开箱可用的自带能力。<font style="color: red">loader</font> 让 `webpack` 能够去处理其他类型的文件，并将它们转换为有效模块，以供应用程序使用，以及被添加到依赖图中。
@@ -71,7 +69,7 @@ rules: [
 ];
 ```
 
-### 1-3、`css-loader`
+## `css-loader`
 
 - `css-loader` 中有 `importLoaders` 这个配置项，它代表在 `css-loader` 处理之前还有多少个其他 `loader` 处理它。
   > 比如说 `@import` 引入的样式文件，因为 `@import` 这个语法本身就可以直接被 `css-loader` 处理了，所以在 `index.css` 中通过 `@import` 引入 `xxx.css` 后，`xxx.css` 中的代码就不会再回过头被 `postcss-loader` 处理了。这样就会造成引入的样式文件没有得到 `postcss-loader` 的处理。详见[这里](https://juejin.cn/post/7000519839378833416)
@@ -123,12 +121,12 @@ module.exports = {
 
 上述代码块中的 `importLoaders` 对应的是一个数值，默认为 `0`，表示通过 `@import` 引入的资源在被 `css-loader` 处理之前不需要被 `css-loader` 之前的任何 `loader` 进行处理；如果数值为 1，则表示通过 `@import` 引入的资源在被 `css-loader` 处理之前会被 `css-loader` 之前的一个 loader 先进行处理（这里即 `postcss-loader`）；如果数值为 2，则表示通过 `@import` 引入的资源在被 `css-loader` 处理之前会被 `css-loader` 之前的两个 `loader` 先进行处理（这里即 `less-loader` 和 `postcss-loader`），以此类推。
 
-### 1-4、`style-loader` vs `vue-style-loader`
+## `style-loader` vs `vue-style-loader`
 
 - `style-loader` 的作用就是将打包处理好的样式文件插入到 `head` 标签内的。（当然还有别的功能）
 - `vue-style-loader` 也有将打包处理好的样式文件插入到 `head` 标签内的功能，同时具备 `ssr` 服务端渲染的功能，而这是 `style-loader` 不具备的。
 
-### 1-5、 `browserslist` 的魔法
+## `browserslist`
 
 > `Browserslist` 是什么？ `Browserslist` 是一个在不同的前端工具之间，共享目标浏览器和 `Node.js` 版本的配置。
 
@@ -139,7 +137,3 @@ module.exports = {
 - stylelint-no-unsupported-browser-features
 - postcss-normalize
 - obsolete-webpack-plugin
-
-## 二、webpack 中的 `source-map`
-
-### 2-1、 `devtool` 配置
