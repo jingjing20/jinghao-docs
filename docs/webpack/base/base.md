@@ -137,3 +137,20 @@ module.exports = {
 - stylelint-no-unsupported-browser-features
 - postcss-normalize
 - obsolete-webpack-plugin
+
+## webpack 配置提升化实现
+
+- 在配置文件中写上下面的代码就可以了
+
+```js
+/**
+ * @type {import('webpack').Configuration}
+ **/
+```
+
+- 这是 TypeScript 中提供特性。
+- 虽然我们这里只是一个 JavaScript 文件，但是在 VSCode 中的类型系统都是基于 TypeScript 的
+- 所以可以直接按照这种方式使用，详细信息你可以参考这种  [import-types](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#import-types) 的文档。
+
+- 其次，这种 @type 类型注释的方式是基于 [JSDoc](https://jsdoc.app/) 实现的。
+- JSDoc 中类型注释的用法还有很多，详细可以参考官方文档中对 [@type](https://jsdoc.app/tags-type.html) 标签的介绍。
