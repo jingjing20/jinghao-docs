@@ -4,11 +4,6 @@
 
 #### 先给一张 vue 官网介绍生命周期的流程图
 
----
-
-![mark](http://image.jinghao.xyz/blog/20200501/pbcUaxunrjJ5.png)
-
----
 
 ::: danger 温馨提示
 官方给的东西肯定很官方啦，不过单看一张图对理解 vue 生命周期钩子函数来说肯定还是有些难度的。不过各位小伙伴不要着急，本文 **<font face="黑体" color=red size="3"> \***以简单直接的实例**\* </font>** 来对此图进行理解。

@@ -88,11 +88,6 @@ Number('') -> 返回的是 0
 
 **2、null === null**
 
-### MDN 对比图
-
-![mark](http://image.jinghao.xyz/blog/20200601/yHs670dUzalt.png)
-
-![mark](http://image.jinghao.xyz/blog/20200601/0woxYIeahVnr.png)
 
 ## 五、null 和 undefined 的区别
 

@@ -95,14 +95,10 @@ const sidebar = [
   {
     text: 'Vue',
     // 是否折叠
-    collapsed: true,
+    collapsed: false,
     items: [
-      { text: 'vuejichu', link: '/Vue/vuejichu.md' },
-      { text: 'vuecomponent', link: '/Vue/vuecomponent.md' },
-      { text: 'vuelife', link: '/Vue/vuelife.md' },
-      { text: 'vueadmin', link: '/Vue/vueadmin.md' },
-      { text: 'vuequestions', link: '/Vue/vuequestions.md' },
-      { text: 'vue响应式原理', link: '/Vue/vue响应式原理.md' }
+      { text: 'vue 重点知识', link: '/Vue/vuequestions.md' },
+      { text: 'vue 原理源码解析', link: '/Vue/vue-source-code.md' }
     ]
   },
   {
@@ -181,7 +177,10 @@ const sidebar = [
       {
         text: '链表',
         collapsed: true,
-        items: [{ text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' }]
+        items: [
+          { text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' },
+          { text: '206、反转链表', link: '/leetcode/链表/206.反转链表.md' },
+        ]
       },
       {
         text: '双指针',

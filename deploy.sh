@@ -9,7 +9,7 @@ npm run build
 # 进入生成的文件夹
 cd docs/.vitepress/dist
 
-# echo 'jinghao.xyz' > CNAME
+# echo 'wangzhihao.top' > CNAME
 
 git init
 git add -A

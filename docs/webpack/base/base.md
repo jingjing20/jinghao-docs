@@ -15,7 +15,7 @@
 - 3、假如有个 js 文件里面有函数，js 确实被引用了，但是函数未被执行，函数也不会被打包。
   其中涉及到`tree shaking`的概念。
 
-<img src="webpack_main.png"/>
+![webpack_main](webpack_main.png)
 
 ## `loader 配置`
 
