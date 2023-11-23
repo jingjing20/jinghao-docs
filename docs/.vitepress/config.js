@@ -93,12 +93,12 @@ const sidebar = [
     ]
   },
   {
-    text: 'Vue',
+    text: 'vue',
     // 是否折叠
     collapsed: false,
     items: [
-      { text: 'vue 重点知识', link: '/Vue/vuequestions.md' },
-      { text: 'vue 原理源码解析', link: '/Vue/vue-source-code.md' }
+      { text: 'vue 重点知识', link: '/vue/vuequestions.md' },
+      { text: 'vue 原理源码解析', link: '/vue/vue-source-code.md' }
     ]
   },
   {
