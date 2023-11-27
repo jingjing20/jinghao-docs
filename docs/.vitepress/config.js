@@ -178,8 +178,11 @@ const sidebar = [
         text: '链表',
         collapsed: true,
         items: [
-          { text: '24、两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' },
-          { text: '206、反转链表', link: '/leetcode/链表/206.反转链表.md' },
+          { text: '2.两数相加', link: '/leetcode/链表/2.两数相加.md' },
+          { text: '21.合并两个有序链表', link: '/leetcode/链表/21.合并两个有序链表.md' },
+          { text: '24.两两交换链表中的节点', link: '/leetcode/链表/24.两两交换链表中的节点.md' },
+          { text: '160.相交链表', link: '/leetcode/链表/160.相交链表.md' },
+          { text: '206.反转链表', link: '/leetcode/链表/206.反转链表.md' }
         ]
       },
       {
