@@ -290,3 +290,33 @@ done
 
 
 ```
+
+## git clone --depth
+
+- 我在拉取 react 项目代码的时候，发现 react 仓库太大，直接 clone 下来太费时间。
+
+- 在执行 `git clone` 命令时，可以指定 `--depth` 选项
+
+```shell
+git clone --depth 1 https://github.com/facebook/react
+```
+
+- 这样只会拉取最新的提交，你会发现拉完之后不能切换到其他分支或者 commit
+
+- 可以再在终端执行
+
+```shell
+git fetch --unshallow
+```
+
+- 执行完成之后本地就会有所有的提交记录了。
+
+![Alt text](image.png)
+
+## git 设置别名 alias
+
+- 实现切换分支的同时拉取最新代码的别名
+
+```shell
+git config --global alias.cop '!f() { git checkout $1 && git pull; }; f'
+```
