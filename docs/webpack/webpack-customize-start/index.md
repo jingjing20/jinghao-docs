@@ -211,3 +211,5 @@ plugins: [
   process.env.NODE_SELECT && new webpack.NormalModuleReplacementPlugin(/src\/nav.js$/, '../router.nav.js')
 ].filter(Boolean);
 ```
+
+- `NormalModuleReplacementPlugin` 这个插件可以在 webpack 执行的过程中用某个文件替换原本应该执行的文件
