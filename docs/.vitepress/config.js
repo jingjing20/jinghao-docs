@@ -98,7 +98,8 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'vue 重点知识', link: '/vue/vuequestions.md' },
-      { text: 'vue 原理源码解析', link: '/vue/vue-source-code.md' }
+      { text: 'vue2 原理源码解析', link: '/vue/vue2-source-code.md' },
+      { text: 'vue3 官方文档记录', link: '/vue/vue3-docs-notes.md' },
     ]
   },
   {
