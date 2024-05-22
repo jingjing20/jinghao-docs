@@ -70,9 +70,9 @@ const sidebar = [
     // 是否折叠
     collapsed: true,
     items: [
-      { text: 'JS大杂烩', link: '/JavaScript/JS大杂烩.md' },
+      { text: 'JS基础', link: '/JavaScript/javascript-base.md' },
       { text: '数组相关', link: '/JavaScript/数组相关.md' },
-      { text: '深浅拷贝', link: '/JavaScript/深浅拷贝.md' },
+      // { text: '深浅拷贝', link: '/JavaScript/深浅拷贝.md' },
       { text: '继承', link: '/JavaScript/继承.md' },
       { text: 'event-loop', link: '/JavaScript/event-loop.md' },
       { text: '异步总结', link: '/JavaScript/异步总结.md' },
