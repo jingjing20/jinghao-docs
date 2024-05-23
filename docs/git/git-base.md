@@ -79,9 +79,70 @@ git reset --soft HEAD~1
 - 一种情况是，你需要另一个分支的所有代码变动，那么就采用合并（git merge）。
 - 另一种情况是，你只需要部分代码变动（某几个提交），这时可以采用 git cherry-pick。
 - `git cherry-pick` 命令的作用，就是将指定的提交（commit）应用于其他分支。
-  我在实习过程中有一次写完代码发现自己写代码的分支错了、、、改动又有点多，不想重新切换分支写一遍。我就直接在当前分支提交了代码，然后到正确的功能分支上用 `git log` 查到那次代码提交的 `commitHash`，然后用`git cherry-pick <commitHash>` 这个命令把这次提交的代码合入当前正确的功能分支。
 
 更多用法参考阮一峰大神的文章: https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
+
+::: info 注意
+### 今天遇到一个问题
+我在一个本地分支上写好了代码提交了，之后误把这个分支删除了，我尝试用 `git cherry-pick` 到自己的新分支上，但是报错了 `error: commit cf9d2748... is a merge but no -m option was given.`
+
+### 原因
+当你试图 cherry-pick 一个合并提交时，Git 需要知道你希望应用哪个父提交的更改。这就是为什么会出现错误 `commit is a merge but no -m option was given`。
+
+合并提交有两个或多个父提交，你需要指定使用哪个父提交的更改。你可以通过 `-m` 选项来指定这是第几个父提交。通常，合并提交的第一个父提交是你合并到的分支，第二个父提交是你合并进来的分支。
+
+### 解决方法
+
+1. **查看合并提交的父提交**
+
+   你可以使用 `git show <commit-hash>` 来查看合并提交的详细信息，包括它的父提交。例如：
+
+   ```bash
+   git show cf9d2748426b1ef5b31f4bcbc6640769b678707b
+   ```
+
+   这将显示合并提交的详细信息，其中包括它的父提交哈希。你会看到类似下面的输出：
+
+   ```
+   commit cf9d2748426b1ef5b31f4bcbc6640769b678707b (HEAD -> master)
+   Merge: a1b2c3d d4e5f6g
+   Author: Your Name <your.email@example.com>
+   Date:   Tue May 23 10:20:30 2023 +0000
+
+       Merge branch 'feature-branch'
+   ```
+
+   这里，`a1b2c3d` 是第一个父提交，`d4e5f6g` 是第二个父提交。
+
+2. **指定父提交**
+
+   使用 `-m` 选项来指定你希望 cherry-pick 哪个父提交的更改。例如，如果你希望应用第一个父提交的更改（通常是合并到的分支），你可以这样做：
+
+   ```bash
+   git cherry-pick -m 1 cf9d2748426b1ef5b31f4bcbc6640769b678707b
+   ```
+
+   这里的 `-m 1` 指定你希望应用第一个父提交的更改。
+
+3. **解决冲突**
+
+   如果在 `cherry-pick` 过程中遇到冲突，Git 会提示你哪些文件有冲突。你需要手动解决这些冲突，然后继续 `cherry-pick` 过程：
+
+   ```bash
+   git add <resolved-files>
+   git cherry-pick --continue
+   ```
+
+   如果你决定放弃这个 `cherry-pick` 操作，可以使用以下命令：
+
+   ```bash
+   git cherry-pick --abort
+   ```
+
+### 总结
+
+为了成功地 `cherry-pick` 一个合并提交，你需要使用 `-m` 选项来指定父提交。这是因为合并提交有多个父提交，Git 需要知道你希望应用哪个父提交的更改。通过查看合并提交的详细信息并指定父提交，就应该能成功地完成 `cherry-pick` 操作。
+:::
 
 ## git stash 用法解析
 
