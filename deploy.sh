@@ -9,12 +9,12 @@ npm run build
 # 进入生成的文件夹
 cd docs/.vitepress/dist
 
-echo 'blog.wangzhihao.top' > CNAME
+# echo 'blog.wangzhihao.top' > CNAME
 
 git init
 git add -A
 git commit -m 'update'
 
 # 如果发布到 https://<USERNAME>.github.io
-git push -f git@github.com:jingjing20/jingjing20.github.io.git main
+git push -f git@github.com:jingjing20/jingjing20.github.io.git master
 cd -
