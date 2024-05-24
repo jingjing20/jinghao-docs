@@ -232,7 +232,8 @@ const sidebar = [
     items: [
       { text: '常用内置模块', link: '/node/常用内置模块.md' },
       { text: '模块化相关', link: '/node/模块化相关.md' },
-      { text: '包管理工具', link: '/node/package-manage.md' }
+      { text: '包管理工具', link: '/node/package-manage.md' },
+      { text: '域名服务器相关', link: '/node/域名服务器相关.md' },
     ]
   },
   {
