@@ -99,7 +99,7 @@ const sidebar = [
     items: [
       { text: 'vue 重点知识', link: '/vue/vuequestions.md' },
       { text: 'vue2 原理源码解析', link: '/vue/vue2-source-code.md' },
-      { text: 'vue3 官方文档记录', link: '/vue/vue3-docs-notes.md' },
+      { text: 'vue3 官方文档记录', link: '/vue/vue3-docs-notes.md' }
     ]
   },
   {
@@ -232,8 +232,7 @@ const sidebar = [
     items: [
       { text: '常用内置模块', link: '/node/常用内置模块.md' },
       { text: '模块化相关', link: '/node/模块化相关.md' },
-      { text: '包管理工具', link: '/node/package-manage.md' },
-      { text: '域名服务器相关', link: '/node/域名服务器相关.md' },
+      { text: '包管理工具', link: '/node/package-manage.md' }
     ]
   },
   {
@@ -270,6 +269,15 @@ const sidebar = [
     items: [
       { text: 'nginx 静态文件托管', link: '/nginx/static-file-manage/index.md' },
       { text: 'nginx 反向代理', link: '/nginx/reverse-proxy/index.md' }
+    ]
+  },
+  {
+    text: '服务器部署相关',
+    // 是否折叠
+    collapsed: false,
+    items: [
+      { text: '域名服务器初始化', link: '/server/域名服务器初始化/index.md' },
+      { text: '服务器操作系统相关', link: '/server/服务器操作系统相关/index.md' }
     ]
   },
   {
