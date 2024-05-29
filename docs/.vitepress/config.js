@@ -277,7 +277,8 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: '域名服务器初始化', link: '/server/域名服务器初始化/index.md' },
-      { text: '服务器操作系统相关', link: '/server/服务器操作系统相关/index.md' }
+      { text: '服务器操作系统相关', link: '/server/服务器操作系统相关/index.md' },
+      { text: '文件目录权限相关', link: '/server/文件目录权限相关/index.md' }
     ]
   },
   {
