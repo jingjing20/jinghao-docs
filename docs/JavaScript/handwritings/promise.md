@@ -40,6 +40,22 @@ Promise._all = (promises) => {
 };
 ```
 
+::: info 📢
+
+在第 27 行使用 `Promise.resolve(promise)` 将每一个 `promise` 包装一层是为了确保无论传入的是一个已经是 `Promise` 的对象，还是一个普通值，都可以以 `Promise` 的方式进行处理。这么做有以下几个原因：
+
+1. **统一处理传入的值**：`Promise.all` 接受的参数可以是一个 `Promise` 对象的可迭代对象，但也可以是其他普通值（非 `Promise` 对象）。通过 `Promise.resolve(promise)`，可以将普通值转化为一个已解决的 `Promise`，这样统一处理非常方便。
+
+2. **保证接口的一致性**：如果直接使用传入的值，不做处理，那么在处理过程中就需要分开处理 `Promise` 和普通值两种情况，这样代码会变得复杂和冗长。使用 `Promise.resolve(promise)` 可以将所有传入值都转化为 `Promise`，这样后续的 `then` 和 `catch` 方法调用就可以直接使用，而不用区分是否是 `Promise`。
+
+3. **处理非 `Promise` 值**：假设传入的可迭代对象中包含普通值，例如 `[Promise.resolve(1), 2, Promise.resolve(3)]`，如果不使用 `Promise.resolve(promise)`，直接处理这些值会导致普通值不会触发 `then` 方法，也就无法加入到结果数组中。因此，使用 `Promise.resolve(promise)` 能确保每个元素都能正确处理并加入结果数组。
+
+通过这一层包装，可以确保代码在处理每一个 `promise` 或普通值时，都能按预期进行，保证 `Promise.all` 的正确性和一致性。
+
+总结一下，使用 `Promise.resolve(promise)` 的主要目的是为了将所有传入的参数统一转化为 `Promise` 对象，这样可以简化代码逻辑，确保后续处理的一致性和正确性。
+
+:::
+
 ## 实现一个 promise.race
 
 ```js
