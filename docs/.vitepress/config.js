@@ -278,7 +278,8 @@ const sidebar = [
     items: [
       { text: '域名服务器初始化', link: '/server/域名服务器初始化/index.md' },
       { text: '服务器操作系统相关', link: '/server/服务器操作系统相关/index.md' },
-      { text: '文件目录权限相关', link: '/server/文件目录权限相关/index.md' }
+      { text: '文件目录权限相关', link: '/server/文件目录权限相关/index.md' },
+      { text: '生产环境搭建', link: '/server/生产环境搭建/index.md' },
     ]
   },
   {
@@ -324,7 +325,7 @@ module.exports = {
   // markdown 配置
   markdown,
   // 站点标题
-  title: 'Cobweb Docs',
+  title: 'wzh docs',
   // 站点说明
   description: '婧婧的成长之路，包含前端常用知识、源码阅读笔记、、日常问题汇总和提效工具等',
   // base URL
