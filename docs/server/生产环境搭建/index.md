@@ -413,3 +413,84 @@ pm2 start index.js --name node-app
 :::
 
 - 到这里我们整个服务器环境就搭建好了，接下来我们就可以尝试把自己本地开发的项目部署到生产环境了。
+
+## 部署到生产环境
+
+### 部署后端服务
+
+- 我们需要把远程仓库的代码拉到服务器上，所以需要在服务器上安装 `git`
+
+```sh
+sudo dnf install git -y
+```
+
+- 然后把远程仓库的代码拉到服务器上
+
+```sh
+git clone git@github.com:jingjing20/snap-shots-node.git
+```
+
+::: info 注意 📢
+
+- 直接这么执行 git clone 会报错没权限
+
+- 我们需要把服务器上的 ssh 公钥添加到我们的远程仓库的 Deploy keys 再拉代码
+
+![alt text](image-4.png)
+
+![alt text](image-3.png)
+
+:::
+
+- 成功拉完代码之后，我们就可以在服务器上执行 `pnpm/npm install` 来安装依赖了
+
+- 装完依赖之后如果有用到 env 文件的话，可以把 env 文件拷贝到服务器上或者新建一个 env 文件
+
+- 然后执行 build 命令打包项目
+
+- 成功之后就可以用 pm2 来启动项目了
+
+```sh
+pm2 start dist/main.js --name wzh-node
+```
+
+![alt text](image-5.png)
+
+### 部署前端服务
+
+## 后续问题记录
+
+### nginx 问题
+
+::: info 问题 📢
+
+- 上传文件报错了
+
+![alt text](image-6.png)
+
+- 默认情况下，Nginx 限制客户端请求主体（例如文件上传）的最大大小为 1MB。
+- 如果需要更改这个限制，可以通过调整 Nginx 配置文件中的 `client_max_body_size` 指令来实现。
+
+:::
+
+#### 配置 `client_max_body_size`
+
+**打开 Nginx 配置文件**：
+
+通常在 `/etc/nginx/nginx.conf` 或 `/etc/nginx/conf.d/default.conf`
+
+```sh
+sudo vi /etc/nginx/nginx.conf
+```
+
+**找到 `http {` 块**，在其中添加或修改 `client_max_body_size` 指令。例如，将文件上传限制增加到 512MB：
+
+```nginx
+http {
+    ...
+    client_max_body_size 512M;
+    ...
+}
+```
+
+- 再次上传应该就会成功了
