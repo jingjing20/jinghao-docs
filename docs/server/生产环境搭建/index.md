@@ -306,51 +306,125 @@ sudo certbot renew --dry-run
 
 :::
 
-## 配置 Nginx 反向代理
+## 部署到生产环境
+
+### 部署后端服务
+
+- 我们需要把远程仓库的代码拉到服务器上，所以需要在服务器上安装 `git`
+
+```sh
+sudo dnf install git -y
+```
+
+- 然后把远程仓库的代码拉到服务器上
+
+```sh
+git clone git@github.com:jingjing20/snap-shots-node.git
+```
+
+::: info 注意 📢
+
+- 直接这么执行 git clone 会报错没权限
+
+- 我们需要把服务器上的 ssh 公钥添加到我们的远程仓库的 Deploy keys 再拉代码
+
+![alt text](image-4.png)
+
+![alt text](image-3.png)
+
+:::
+
+- 成功拉完代码之后，我们就可以在服务器上执行 `pnpm/npm install` 来安装依赖了
+
+- 装完依赖之后如果有用到 env 文件的话，可以把 env 文件拷贝到服务器上或者新建一个 env 文件
+
+- 然后执行 build 命令打包项目
+
+- 成功之后就可以用 pm2 来启动项目了
+
+```sh
+pm2 start dist/main.js --name wzh-node
+```
+
+![alt text](image-5.png)
+
+### 部署前端服务
+
+- 部署前端代码也可以和部署后端代码一样
+- 先拉代码、安装依赖、打包代码得到 dist 文件夹
+- 然后配置 nginx 就行了
+
+- 也可以直接本地打包出来之后，将 dist 文件夹拷贝到服务器上
+
+```sh
+scp -r dist wangzhihao@101.126.55.***:~/snap-shots-vue
+```
+
+![alt text](image-7.png)
+
+## 配置 Nginx 静态文件与反向代理
 
 - 客户端接口请求过来了，我想让运行在服务端的 node 应用程序去处理这些请求，这时候就需要配置一个反向代理
 
-- 在 `/etc/nginx/conf.d` 里面新建一个 `wzh-node-api.wangzhihao.top.conf` 文件，这个目录下的 `.conf` 文件都会被 `Nginx` 读取，配置如下
+- 在 `/etc/nginx/conf.d` 里面新建一个 `snap-shots.wangzhihao.top.conf` 文件，这个目录下的 `.conf` 文件都会被 `Nginx` 读取，配置如下
 
 ```sh
 server {
-    listen 80;
-    server_name wzh-node-api.wangzhihao.top;
-    return 301 https://$host$request_uri;
+   server_name  snap-shots.wangzhihao.top;
+   location / {
+       root /home/wangzhihao/snap-shots-vue;
+       try_files $uri /index.html;
+   }
+   location /api/ {
+	proxy_set_header X-Forwarded-Host $host;
+ 	proxy_set_header X-Forwarded-Proto $scheme;
+ 	proxy_set_header X-Real-IP $remote_addr;
+ 	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ 	proxy_set_header Host $http_host;
+ 	proxy_set_header Upgrade $http_upgrade;
+ 	proxy_set_header Connection "upgrade";
+ 	proxy_redirect off;
+ 	expires off;
+ 	sendfile off;
+        proxy_pass http://localhost:3000/;
+   }
+   error_page 404 /404.html;
+   location = /404.html {
+   }
+
+   error_page 500 502 503 504 /50x.html;
+   location = /50x.html {
+   }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/snap-shots.wangzhihao.top/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/snap-shots.wangzhihao.top/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
 }
-
 server {
-    listen 443 ssl http2;
-    server_name wzh-node-api.wangzhihao.top;
+    if ($host = snap-shots.wangzhihao.top) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
 
-    ssl_certificate /etc/letsencrypt/live/wzh-node-api.wangzhihao.top/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/wzh-node-api.wangzhihao.top/privkey.pem;
-    include /etc/letsencrypt/options-ssl-nginx.conf;
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
-    location / {
-        proxy_set_header  X-Forwarded-Host $host;
-        proxy_set_header  X-Forwarded-Proto $scheme;
-        proxy_set_header  X-Real-IP  $remote_addr;
-        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header  Host $http_host;
-        proxy_set_header  Upgrade $http_upgrade;
-        proxy_set_header  Connection "upgrade";
-        proxy_redirect    off;
-        expires           off;
-        sendfile          off;
-        proxy_pass        http://127.0.0.1:3000;
-    }
+   listen       80;
+   listen       [::]:80;
+   server_name  snap-shots.wangzhihao.top;
+    return 404; # managed by Certbot
+
 }
 ```
 
-- 最重要的一行就是 `proxy_pass` `http://127.0.0.1:3000`;
+- 最重要的一行就是 `proxy_pass` `http://127.0.0.1:3000/`;
 
-- 这会让原本请求到 `wzh-node-api.wangzhihao.top` 的请求通过 `Nginx` 反向代理到 `http://127.0.0.1:3000`;
+- 这会让原本请求到 `snap-shots.wangzhihao.top` 的请求通过 `Nginx` 反向代理到 `http://127.0.0.1:3000/`;
 
 - 然后通过 `sudo systemctl restart nginx` 来重启 `Nginx`
 
-- 这样就能让 `wzh-node-api.wangzhihao.top` 的请求通过 `Nginx` 反向代理到 `http://127.0.0.1:3000`
+- 这样就能让 `snap-shots.wangzhihao.top` 的请求通过 `Nginx` 反向代理到 `http://127.0.0.1:3000/`
 
 ![alt text](502.png)
 
@@ -359,7 +433,8 @@ server {
 - 现在访问我们的服务器地址会 502
 - 这就说明反向代理成功了，因为目前我们的服务器上的 `http://127.0.0.1:3000` 暂时没有提供任何响应
 - 截图显示的是 ip 不是域名，因为我的域名正在备案中，之后再处理。
-  :::
+
+:::
 
 ## 使用 PM2 启动服务
 
@@ -411,52 +486,6 @@ pm2 start index.js --name node-app
 ![alt text](image-2.png)
 
 :::
-
-- 到这里我们整个服务器环境就搭建好了，接下来我们就可以尝试把自己本地开发的项目部署到生产环境了。
-
-## 部署到生产环境
-
-### 部署后端服务
-
-- 我们需要把远程仓库的代码拉到服务器上，所以需要在服务器上安装 `git`
-
-```sh
-sudo dnf install git -y
-```
-
-- 然后把远程仓库的代码拉到服务器上
-
-```sh
-git clone git@github.com:jingjing20/snap-shots-node.git
-```
-
-::: info 注意 📢
-
-- 直接这么执行 git clone 会报错没权限
-
-- 我们需要把服务器上的 ssh 公钥添加到我们的远程仓库的 Deploy keys 再拉代码
-
-![alt text](image-4.png)
-
-![alt text](image-3.png)
-
-:::
-
-- 成功拉完代码之后，我们就可以在服务器上执行 `pnpm/npm install` 来安装依赖了
-
-- 装完依赖之后如果有用到 env 文件的话，可以把 env 文件拷贝到服务器上或者新建一个 env 文件
-
-- 然后执行 build 命令打包项目
-
-- 成功之后就可以用 pm2 来启动项目了
-
-```sh
-pm2 start dist/main.js --name wzh-node
-```
-
-![alt text](image-5.png)
-
-### 部署前端服务
 
 ## 后续问题记录
 
