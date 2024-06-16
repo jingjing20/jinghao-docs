@@ -523,3 +523,57 @@ http {
 ```
 
 - 再次上传应该就会成功了
+
+### mysql 超时重连问题
+
+MySQL 默认会在一段时间内没有任何活动后自动关闭连接。这个时间由 MySQL 服务器的两个配置参数控制：`wait_timeout`和`interactive_timeout`。
+
+- **`wait_timeout`**：这是非交互式客户端（如，通过 API 或后端应用连接的客户端）连接在自动关闭之前等待活动的秒数。默认值通常设置在 8 小时（28800 秒）左右。
+
+- **`interactive_timeout`**：用于交互式连接，比如，通过 MySQL 命令行客户端的连接。这个设置同样在无活动时等待的秒数，8 小时（28800 秒）是一个典型的默认值。
+
+这些默认值可能因安装和使用的 MySQL 服务器的具体版本、配置或环境（如，托管数据库服务可能会有不同的默认设置）而异。
+
+如果需要查看或修改这些设置，可以这样操作：
+
+#### 查看当前设置
+
+你可以通过 MySQL 命令行客户端查看这些参数的当前值：
+
+```sql
+SHOW VARIABLES LIKE 'wait_timeout';
+SHOW VARIABLES LIKE 'interactive_timeout';
+```
+
+这将显示两个配置的当前值。
+
+#### 修改设置
+
+- **临时修改**：在当前会话中，你可以设置这些参数的值。需要注意的是，这种变更只对当前数据库连接生效，且在连接关闭时失效。
+
+```sql
+SET @@wait_timeout = 28800;
+SET @@interactive_timeout = 28800;
+```
+
+- **永久修改**：要永久修改这些值，需要在 MySQL 的配置文件（通常是`my.cnf`或`my.ini`）中添加或修改这些参数，然后重启 MySQL 服务器。
+
+```ini
+[mysqld]
+wait_timeout=28800
+interactive_timeout=28800
+```
+
+- 也可以在服务端增加一个定时器，每隔一段时间调用一下 mysql 查询语句
+
+```js
+/**
+ * 处理服务器保持活跃状态，防止 mysql 超时断开连接
+ */
+const handleServerActiveStatus = () => {
+  setInterval(() => {
+    connection.query('SELECT 1');
+    console.log('🚀 保持mysql活跃状态');
+  }, 3600000); // 每3600000毫秒（1小时）发送一次查询
+};
+```
