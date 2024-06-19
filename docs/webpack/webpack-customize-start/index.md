@@ -1,16 +1,16 @@
-# 启动巨石项目中的某些特定模块实现
+# 自定义启动巨石项目中的某些特定模块实现
 
 ## 背景
 
 - 在公司我们小组主要负责一个大数据管理平台的日常开发迭代
-- 这个项目是一个较老的巨石项目，用的 webpack4，总共有 `42` 个子模块，每次启动服务花费时间太长，平均大概得有 5 分钟
+- 这个项目是一个较老的巨石项目，用的 webpack4，总共有 `42` 个子模块，每次启动服务花费时间太长，平均大概得有 `5` 分钟
 - 其实我们六七个人每个人负责几个系统，平时大多数时间都只需要在一个子模块写代码，但是要把整个系统所有模块都启动，这个问题很影响我们的开发体验
 - 我想把这个问题优化一下，提高下我们小组的日常开发体验
 
 ## 调研方案
 
 - 网上调研了下，同时结合我们项目实际情况，实现了这种可以自由选择特定模块启动本地服务的功能
-- 启动项目的时间成功由原来的 5 分钟缩短至秒级。
+- 启动项目的时间成功由原来的 <span style="color:red">**5 分钟**</span> 缩短至 <span style="color:red">**20 秒**</span> 左右
 
 ## 具体实现
 
@@ -25,7 +25,7 @@ const cloneDeep = require('lodash/cloneDeep');
 
 const rcPath = path.join(__dirname, '.datastarrc');
 
-const whiteList = ['audit', 'clusterManage', 'oneservice', 'onepool', 'manage'];
+const whiteList = ['aaa', 'bbb', 'xxx']; // 不想作为可选的子项目列表
 
 const loadOptions = () => {
   let options;
@@ -204,6 +204,16 @@ inquirer
   });
 ```
 
+### 增加执行命令
+
+- package.json
+
+- 增加了一个变量 `NODE_SELECT`，用于控制 `webpack` 是否添加 `NormalModuleReplacementPlugin` 插件
+
+```js
+ "dev:select": "cross-env NODE_ENV=development NODE_SELECT=true webpack-dev-server --progress --config build/webpack.config.dev.js --max-old-space-size=10240",
+```
+
 ### webpack 改造
 
 ```js
@@ -212,4 +222,4 @@ plugins: [
 ].filter(Boolean);
 ```
 
-- `NormalModuleReplacementPlugin` 这个插件可以在 webpack 执行的过程中用某个文件替换原本应该执行的文件
+- `NormalModuleReplacementPlugin` 这个插件可以在 `webpack` 执行的过程中用某个文件替换原本应该执行的文件

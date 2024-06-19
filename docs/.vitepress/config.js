@@ -119,7 +119,8 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'base', link: '/webpack/base/base.md' },
-      { text: 'code-splitting', link: '/webpack/code-splitting/index.md' }
+      { text: 'code-splitting', link: '/webpack/code-splitting/index.md' },
+      { text: 'webpack-customize-start', link: '/webpack/webpack-customize-start/index.md' }
     ]
   },
   {
@@ -279,7 +280,7 @@ const sidebar = [
       { text: '域名服务器初始化', link: '/server/域名服务器初始化/index.md' },
       { text: '服务器操作系统相关', link: '/server/服务器操作系统相关/index.md' },
       { text: '文件目录权限相关', link: '/server/文件目录权限相关/index.md' },
-      { text: '生产环境搭建', link: '/server/生产环境搭建/index.md' },
+      { text: '生产环境搭建', link: '/server/生产环境搭建/index.md' }
     ]
   },
   {
