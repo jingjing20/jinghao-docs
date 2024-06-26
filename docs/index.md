@@ -3,7 +3,7 @@ layout: home
 
 hero:
     name: web Docs
-    text: 生活第一，其他往后捎
+    text: 每天进步一点点🤏🏻
     tagline: 一个热爱篮球的小前端...
     image:
         src: /home.png
