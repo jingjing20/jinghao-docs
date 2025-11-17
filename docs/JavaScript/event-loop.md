@@ -332,3 +332,88 @@ setImmediate
   这就意味着在第一次 tick 中，已经准备好了 timer queue；所以会直接按照顺序执行即可。
 
   **即 先 setTimeout 后 setImmediate。**
+
+## 三、通过浏览器的 `performance` 面板分析事件循环机制
+
+- Performance 是 Chrome DevTools 内置的用来分析代码执行耗时的工具，它会记录每个函数、每个宏微任务的耗时。
+- 简单来说，Performance 面板是 Chrome DevTools 内置的一个功能强大、专业的性能分析工具。
+- 它就像一个“应用程序的心电图仪”，可以让你深入洞察网页在运行时的所有细节，包括 JavaScript 执行、样式计算、布局、绘制、内存占用等
+- 它常用来帮助你找到并修复网站的性能瓶颈，但其实用来分析事件机制简直绝妙。
+
+### 示例代码
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <script>
+      function calc() {
+        let a = 0;
+        for (let i = 0; i < 1000000; i++) {
+          a += i;
+        }
+      }
+
+      function printPromise1() {
+        console.log('promise1');
+        calc();
+      }
+      function printpromise2() {
+        console.log('promise2');
+        calc();
+      }
+      function printtimer1() {
+        console.log('timer1');
+        calc();
+      }
+      function printtimer2() {
+        console.log('timer2');
+        calc();
+      }
+      function printstart() {
+        console.log('start');
+        calc();
+      }
+      function printMutation() {
+        console.log('mutation');
+        calc();
+      }
+      Promise.resolve().then(() => {
+        printPromise1();
+        const timer2 = setTimeout(() => {
+          printtimer2();
+        }, 0);
+      });
+      const timer1 = setTimeout(() => {
+        printtimer1();
+
+        Promise.resolve().then(() => {
+          printpromise2();
+        });
+      }, 0);
+      new MutationObserver(function () {
+        printMutation();
+      }).observe(document.body, {
+        type: 'attribute',
+        attributeFilter: ['class']
+      });
+      document.body.setAttribute('class', 'event-loop');
+
+      printstart();
+    </script>
+  </body>
+</html>
+```
+
+### `performance` 分析截图-总览
+
+![分析截图-总览](1ba5507449c487bb88dd5fd5f08d1f58.png)
+
+- 上面总览图能非常清晰的看到所有执行过程，整体是从左往右、从上往下看执行过程的。
+- 一共有 script 整体代码、timer1、timer2 三个宏任务。
+- 宏任务下能很清楚的看到这个宏任务的执行流程
+
+### `performance` 分析截图-渲染时机
+
+![分析截图-渲染时机](2904dc28d55f70a7d9f6cd1a9cf24aa4.png)
+
